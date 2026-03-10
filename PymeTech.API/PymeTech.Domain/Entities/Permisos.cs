@@ -19,5 +19,16 @@ namespace PymeTech.Domain.Entities
 
 
         private Permisos() { }  
+
+        public Permisos(string modulo, string accion, string? descripcion = null)
+        {
+            if (string.IsNullOrWhiteSpace(modulo))
+                throw new ArgumentException("El módulo no puede estar vacío");
+            if (string.IsNullOrWhiteSpace(accion))
+                throw new ArgumentException("La acción no puede estar vacía");
+            Modulo = modulo;
+            Accion = accion;
+            Descripcion = descripcion;
+        }   
     }
 }
