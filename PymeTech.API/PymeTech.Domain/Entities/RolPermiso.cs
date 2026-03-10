@@ -6,7 +6,35 @@ using System.Threading.Tasks;
 
 namespace PymeTech.Domain.Entities
 {
-    internal class RolPermiso
+    public class RolPermiso
     {
+
+        // Tabla con 4 Relaciones Tenant , Rol , Permiso y usuarios
+        public int  IdTenant { get; private set; }  
+        public int IdRol { get; private set; } 
+        public int IdPermiso { get; private set; }  
+        public DateTime FechaAsignado { get; private set; } 
+        public int AsignadoPor {get; private set; }
+
+        //referencias 
+        public Tenant Tenant { get; private set; }
+        public Rol Rol { get; private set; } 
+        public Permisos Permiso { get; private set; } 
+        public Usuario UsuarioAsignado { get; private set; } 
+            
+
+
+        public RolPermiso() { }
+
+
+        public RolPermiso(int idTenant, int idRol, int idPermiso, int asignadoPor)
+        {
+            IdTenant = idTenant;
+            IdRol = idRol;
+            IdPermiso = idPermiso;
+            FechaAsignado = DateTime.UtcNow;
+            AsignadoPor = asignadoPor;
+        }
+
     }
 }
