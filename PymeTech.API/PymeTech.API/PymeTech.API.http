@@ -1,0 +1,6 @@
+@PymeTech.API_HostAddress = http://localhost:5059
+
+GET {{PymeTech.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
