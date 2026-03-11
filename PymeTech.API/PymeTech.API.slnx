@@ -1,3 +1,6 @@
 <Solution>
   <Project Path="PymeTech.API/PymeTech.API.csproj" />
+  <Project Path="PymeTech.Application/PymeTech.Application.csproj" />
+  <Project Path="PymeTech.Domain/PymeTech.Domain.csproj" />
+  <Project Path="PymeTech.Infrastructure/PymeTech.Infrastructure.csproj" />
 </Solution>

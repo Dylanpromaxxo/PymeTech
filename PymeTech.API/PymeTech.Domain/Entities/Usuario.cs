@@ -28,7 +28,23 @@ namespace PymeTech.Domain.Entities
         public Tenant Tenant { get; private set; }
 
 
-        public ICollection<RolPermiso> RolPermisos { get; private set; } = new List<RolPermiso>();
+        public ICollection<RolPermiso> PermisosAsignados  { get; private set; } = new List<RolPermiso>();
+
+        //Colecciones para registrar las acciones del usuario 
+        public ICollection<Clientes> ClientesCreados { get; private set; } = new List<Clientes>();
+        public ICollection<Clientes> ClientesActulizados { get; private set; } = new List<Clientes>();
+        //Colecciones para otras entidades como Proveedores
+
+        public ICollection<Proveedores> ProveedoresCreados { get; private set; } = new List<Proveedores>();
+        public ICollection<Proveedores> ProveedoresActualizados { get; private set; } = new List<Proveedores>();
+
+        //colecciones para otras entidades como Categorias 
+
+       public ICollection<Categoria> CategoriasCreadas { get; private set; } = new List<Categoria>();
+
+        // colecciones para Almacenes o
+
+
 
         private Usuario() { }
 

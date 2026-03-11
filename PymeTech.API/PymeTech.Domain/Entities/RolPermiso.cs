@@ -14,7 +14,7 @@ namespace PymeTech.Domain.Entities
         public int IdRol { get; private set; } 
         public int IdPermiso { get; private set; }  
         public DateTime FechaAsignado { get; private set; } 
-        public int AsignadoPor {get; private set; }
+        public int? AsignadoPor {get; private set; }
 
         //referencias 
         public Tenant Tenant { get; private set; }
@@ -24,10 +24,10 @@ namespace PymeTech.Domain.Entities
             
 
 
-        public RolPermiso() { }
+        private RolPermiso() { }
 
 
-        public RolPermiso(int idTenant, int idRol, int idPermiso, int asignadoPor)
+        public RolPermiso(int idTenant, int idRol, int idPermiso, int? asignadoPor = null)
         {
             IdTenant = idTenant;
             IdRol = idRol;

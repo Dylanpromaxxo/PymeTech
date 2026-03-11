@@ -21,8 +21,7 @@ namespace PymeTech.Domain.Entities
         // NO A LAS DE ENTITY FRAMEWORK
         public ICollection<Usuario> Usuarios { get; private set; } = new List<Usuario>();
         public ICollection<Rol> Roles { get; private set; } = new List<Rol>();
-        public ICollection<RolPermiso> RolPermisos { get; private set; } = new List<RolPermiso>();
-
+    
         private Tenant() { }
 
         public Tenant(string nombre, string email, string telefono ) {
