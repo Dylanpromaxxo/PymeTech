@@ -20,8 +20,11 @@ namespace PymeTech.Domain.Entities
         // referencias a otras entidades del dominio 
 
             public Tenant Tenant { get; private set; }
-            public Usuario CreadorCategoria { get; private set; } 
+            public Usuario CreadorCategoria { get; private set; }
 
+
+        /// Colecciones para registrar las acciones del usuario 
+        public  ICollection<Productos> Productos { get; private set; } = new List<Productos>(); 
 
 
 

@@ -42,7 +42,9 @@ namespace PymeTech.Domain.Entities
 
        public ICollection<Categoria> CategoriasCreadas { get; private set; } = new List<Categoria>();
 
-        // colecciones para Almacenes o
+        // colecciones para Almacenes 
+
+        public ICollection<Almacenes> AlmacenesCreados { get; private set; } = new List<Almacenes>(); 
 
 
 

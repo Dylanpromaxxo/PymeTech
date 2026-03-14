@@ -38,5 +38,30 @@ namespace PymeTech.Domain.Entities
             FechaActualizacion = DateTime.UtcNow;
             CreadoPor = creadoPor;
         }   
+
+
+        public void ActualizarAlmacen(string nombre, string? descripcion, bool esPrincipal, int? actualizadoPor)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+                throw new ArgumentException("El nombre del almacén no puede estar vacío");
+            Nombre = nombre;
+            Descripcion = descripcion;
+            EsPrincipal = esPrincipal;
+            FechaActualizacion = DateTime.UtcNow;
+            CreadoPor = actualizadoPor;
+        }   
+
+        public void DesactivarAlmacen(int? actualizadoPor)
+        {
+            Activo = false;
+            FechaActualizacion = DateTime.UtcNow;
+            CreadoPor = actualizadoPor;
+        }
+        
+
+
+
+
+
     }
 }

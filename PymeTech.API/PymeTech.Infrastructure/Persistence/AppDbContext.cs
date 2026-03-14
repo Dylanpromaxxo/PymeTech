@@ -21,6 +21,7 @@ namespace PymeTech.Infrastructure.Persistence
         public DbSet<Permisos> Permisos { get; set; }   
         public DbSet<Clientes> Clientes { get; set; } 
         public DbSet<Proveedores> Proveedores { get; set; }
+        public DbSet<Almacenes> Almacenes { get; set; } 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
