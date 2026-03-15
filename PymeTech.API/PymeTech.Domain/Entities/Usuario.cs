@@ -44,7 +44,18 @@ namespace PymeTech.Domain.Entities
 
         // colecciones para Almacenes 
 
-        public ICollection<Almacenes> AlmacenesCreados { get; private set; } = new List<Almacenes>(); 
+        public ICollection<Almacenes> AlmacenesCreados { get; private set; } = new List<Almacenes>();
+
+        //Coleccion para productos
+        public ICollection<Productos> ProductosCreados { get; private set; }
+        public ICollection<Productos> ProductosActualizados { get; private set; }
+
+        //colecciones para Compra
+
+        public ICollection<Compra> ComprasCreadas { get; private set; }
+        public ICollection<Compra> ComprasActualizadas { get; private set; }
+
+      
 
 
 

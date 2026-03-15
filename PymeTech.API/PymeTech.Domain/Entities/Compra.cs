@@ -44,6 +44,9 @@ namespace PymeTech.Domain.Entities
         public Usuario CreadorCompra { get; private set; }
         public Usuario ActualizadorCompra { get; private set; }
 
+        //collection de compradetalle
+        public ICollection<CompraDetalle> Detalles { get; private set; }
+
         // Constructor privado para EF Core
         private Compra() { }
 
