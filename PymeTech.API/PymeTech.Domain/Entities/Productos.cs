@@ -22,7 +22,7 @@ namespace PymeTech.Domain.Entities
         public bool EsServicio { get; private set; }
         public bool Activo { get; private set; }
         public DateTime FechaCreacion { get; private set; }
-        public DateTime FechaActulizacion { get; private set; }
+        public DateTime FechaActualizacion { get; private set; }
         public int? CreadoPor { get; private set; }
         public int? ActualizadoPor { get; private set; }
 
@@ -78,7 +78,7 @@ namespace PymeTech.Domain.Entities
         public void Desactivar(int actualizadoPor ) {
 
             Activo = false; 
-            FechaActulizacion = DateTime.UtcNow ;
+            FechaActualizacion = DateTime.UtcNow ;
             ActualizadoPor = actualizadoPor; 
 
 
