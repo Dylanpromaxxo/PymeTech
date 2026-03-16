@@ -38,7 +38,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
                 .HasConstraintName("FK_Productos_Tenant");
 
             builder.HasOne(p => p.Categoria)
-                .WithMany()
+                .WithMany(p=> p.Productos)
                 .HasForeignKey(fk => fk.IdCategoria)
                 .HasConstraintName("FK_Productos_Categoria");
 

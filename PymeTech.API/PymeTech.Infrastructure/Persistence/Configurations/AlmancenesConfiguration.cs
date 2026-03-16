@@ -32,13 +32,15 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.HasOne(I => I.Tenant)
                 .WithMany()
                 .HasForeignKey(fk => fk.IdTenant)
-                .HasConstraintName("FK_Almacenes_Tenant");
+                .HasConstraintName("FK_Almacenes_Tenant")
+                .OnDelete(DeleteBehavior.Restrict); ;
 
 
             builder.HasOne(references => references.CreadorAlmacen)
                 .WithMany(Referenciador => Referenciador.AlmacenesCreados)
                 .HasForeignKey(foreignKey => foreignKey.CreadoPor)
-                .HasConstraintName("FK_Almacenes_Creado");
+                .HasConstraintName("FK_Almacenes_Creado")
+                .OnDelete(DeleteBehavior.Restrict); ;
 
 
             builder.HasIndex(u => new { u.IdTenant, u.Nombre })

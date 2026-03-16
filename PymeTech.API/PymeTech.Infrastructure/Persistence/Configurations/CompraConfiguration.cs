@@ -98,10 +98,11 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.HasOne(c => c.Tenant)
                 .WithMany()
                 .HasForeignKey(fk => fk.IdTenant)
-                .HasConstraintName("FK_Compra_Tenant");
+                .HasConstraintName("FK_Compra_Tenant")
+                .OnDelete(DeleteBehavior.Restrict); ;
 
             builder.HasOne(c => c.Proveedor)
-                .WithMany()
+                .WithMany(c=> c.Compras )
                 .HasForeignKey(fk => fk.IdProveedor)
                 .HasConstraintName("FK_Compra_Proveedor");
 

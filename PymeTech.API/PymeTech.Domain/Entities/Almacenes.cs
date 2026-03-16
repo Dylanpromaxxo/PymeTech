@@ -22,6 +22,9 @@ namespace PymeTech.Domain.Entities
         public Tenant Tenant { get; private set; } 
         public Usuario CreadorAlmacen { get; private set; } 
 
+        public ICollection<Inventario> Inventarios { get; private set; } = new List<Inventario>();
+        public ICollection<MovimientosInventario> MovimientosInventario { get; private set; } = new List<MovimientosInventario>();
+
 
         private Almacenes() { } 
 

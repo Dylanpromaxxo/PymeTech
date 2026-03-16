@@ -32,6 +32,10 @@ namespace PymeTech.Domain.Entities
         public Usuario CreadorProveedor { get; private set; }
         public Usuario ActualizadorProveedor { get; private set; }
 
+        // Listado de compras asociadas al proveedor 
+
+        public ICollection<Compra> Compras { get; private set; } = new List<Compra>(); 
+
         // Constructor privado para EF Core y para garantizar la integridad de la entidad a través del constructor público
         private Proveedores() { } 
 

@@ -36,6 +36,12 @@ namespace PymeTech.Domain.Entities
         public Usuario ActualizadorProducto { get; private set; }
 
 
+        //Un producto puede estar en varios inventarios (en diferentes almacenes) y puede estar presente en varios detalles de compra y venta, por lo que se definen estas colecciones para representar esas relaciones
+        public ICollection<Inventario> Inventarios { get; private set; } = new List<Inventario>(); 
+        public ICollection<MovimientosInventario> MovimientosDeInventario { get; private set; } = new List<MovimientosInventario>(); 
+
+
+
 
         private Productos() { }
 
