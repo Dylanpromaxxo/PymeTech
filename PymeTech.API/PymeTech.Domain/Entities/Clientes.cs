@@ -29,6 +29,9 @@ namespace PymeTech.Domain.Entities
         public Usuario CreadorClientes { get; private set; }  
         public Usuario ActualizadorClientes { get; private set; }
 
+        public ICollection<Venta> Ventas { get; private set; } = new List<Venta>(); 
+
+
 
 
 

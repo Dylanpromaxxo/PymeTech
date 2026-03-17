@@ -25,6 +25,8 @@ namespace PymeTech.Domain.Entities
         public ICollection<Inventario> Inventarios { get; private set; } = new List<Inventario>();
         public ICollection<MovimientosInventario> MovimientosInventario { get; private set; } = new List<MovimientosInventario>();
 
+        public ICollection<Venta> Ventas { get; private set; } = new List<Venta>(); 
+
 
         private Almacenes() { } 
 
