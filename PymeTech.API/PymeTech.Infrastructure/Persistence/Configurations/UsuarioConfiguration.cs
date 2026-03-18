@@ -20,7 +20,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(u => u.Activo).HasDefaultValue(true);
             builder.Property(u => u.FechaCreacion).IsRequired();
             builder.Property(u => u.FechaActualizacion).IsRequired();
-            builder.Property(u=> u.UltimoLogin).HasColumnType("datetime").IsRequired(false);
+            builder.Property(u=> u.UltimoLogin).HasColumnType("datetime2").IsRequired(false);
 
             builder.HasIndex(u => new { u.IdTenant , u.Email  }).IsUnique();
 
@@ -30,7 +30,8 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.HasOne(u => u.Rol)
                 .WithMany(r => r.Usuarios)
                 .HasForeignKey(u => u.IdRol)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Usuario_Rol");
 
             builder.HasOne(u => u.Tenant)
                 .WithMany(t => t.Usuarios)

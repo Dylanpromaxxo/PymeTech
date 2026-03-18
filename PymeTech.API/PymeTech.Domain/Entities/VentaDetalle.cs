@@ -8,31 +8,31 @@ namespace PymeTech.Domain.Entities
 {
     public class VentaDetalle
     {
-        public int IdVentaDetalle { get; private set; }  
-        public int IdTenant { get; private set; } 
-        public int IdVenta { get; private set; } 
-        public int IdProducto { get; private set; } 
-        public decimal Cantidad { get; private set; } 
+        public int IdVentaDetalle { get; private set; }
+        public int IdTenant { get; private set; }
+        public int IdVenta { get; private set; }
+        public int IdProducto { get; private set; }
+        public decimal Cantidad { get; private set; }
         public decimal PrecioUnitario { get; private set; }
-        public decimal PorcentajeDto { get; private set; } 
-        public decimal MontoDescuento { get; private set; } 
-        public decimal PorcentajeIva { get; private set; } 
-        public decimal MontoIva { get; private set; } 
-        public decimal Subtotal { get; private set; } 
-        public decimal Total { get; private set; } 
-        public string Notas { get; private set; }
+        public decimal PorcentajeDto { get; private set; }
+        public decimal MontoDescuento { get; private set; }
+        public decimal PorcentajeIva { get; private set; }
+        public decimal MontoIva { get; private set; }
+        public decimal Subtotal { get; private set; }
+        public decimal Total { get; private set; }
+        public string? Notas { get; private set; }
 
 
         // relaciones 
-        public Tenant tenant { get; private set; } 
-        public Venta venta { get; private set; } 
+        public Tenant tenant { get; private set; }
+        public Venta venta { get; private set; }
         public Productos producto { get; private set; }
 
 
 
 
-        private VentaDetalle() { } 
-        public VentaDetalle(int idTenant ,  int idVenta, int idProducto, decimal cantidad, decimal precioUnitario, decimal porcentajeDto, decimal montoDescuento, decimal porcentajeIva, decimal montoIva, decimal subtotal, decimal total, string notas)
+        private VentaDetalle() { }
+        public VentaDetalle(int idTenant, int idVenta, int idProducto, decimal cantidad, decimal precioUnitario, decimal porcentajeDto, decimal montoDescuento, decimal porcentajeIva, decimal montoIva, decimal subtotal, decimal total, string? notas)
         {
             if (cantidad <= 0)
                 throw new ArgumentException("La cantidad debe ser mayor a cero");
@@ -56,7 +56,7 @@ namespace PymeTech.Domain.Entities
             Subtotal = subtotal;
             Total = total;
             Notas = notas;
-        } 
+        }
 
     }
 

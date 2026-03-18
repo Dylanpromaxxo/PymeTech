@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-using PymeTech.Domain.Entities; 
+using PymeTech.Domain.Entities;
 
 
 namespace PymeTech.Infrastructure.Persistence.Configurations
@@ -15,17 +15,17 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Almacenes> builder)
         {
-            builder.ToTable("Almacenes"); 
-           
+            builder.ToTable("Almacenes");
 
-            builder.HasKey(k=> k.IdAlmacen).HasName("PK_Almacenes_IdAlmacen");
 
-            builder.Property(p=> p.IdTenant).HasColumnType ("int").IsRequired();   
-            builder.Property(p=> p.Nombre).HasColumnType ("varchar(80)").IsRequired();
-            builder.Property(p=> p.Descripcion).HasColumnType ("varchar(300)").IsRequired(false);
-            builder.Property(p=> p.EsPrincipal).HasColumnType ("bit").IsRequired().HasDefaultValue(false);
-            builder.Property(p=> p.Activo).HasColumnType ("bit").IsRequired().HasDefaultValue(true);
-            builder.Property(p=> p.FechaCreacion).HasColumnType ("datetime2").IsRequired().HasDefaultValueSql("GETDATE()");
+            builder.HasKey(k => k.IdAlmacen).HasName("PK_Almacenes_IdAlmacen");
+
+            builder.Property(p => p.IdTenant).HasColumnType("int").IsRequired();
+            builder.Property(p => p.Nombre).HasColumnType("varchar(80)").IsRequired();
+            builder.Property(p => p.Descripcion).HasColumnType("varchar(300)").IsRequired(false);
+            builder.Property(p => p.EsPrincipal).HasColumnType("bit").IsRequired().HasDefaultValue(false);
+            builder.Property(p => p.Activo).HasColumnType("bit").IsRequired().HasDefaultValue(true);
+            builder.Property(p => p.FechaCreacion).HasColumnType("datetime2").IsRequired().HasDefaultValueSql("GETDATE()");
             builder.Property(p => p.CreadoPor).HasColumnType("int");
 
 
@@ -45,10 +45,10 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
 
             builder.HasIndex(u => new { u.IdTenant, u.Nombre })
                 .IsUnique()
-                .HasDatabaseName("UQ_Almacenes_Nombre"); 
+                .HasDatabaseName("UQ_Almacenes_Nombre");
 
 
-            builder.HasIndex(u => new {u.IdTenant , u.IdAlmacen })
+            builder.HasIndex(u => new { u.IdTenant, u.IdAlmacen })
                 .IsUnique()
                 .HasDatabaseName("UQ_Almacenes_Tenant");
 

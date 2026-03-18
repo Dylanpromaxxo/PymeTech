@@ -11,7 +11,7 @@ namespace PymeTech.Domain.Entities
         public  int IdAlmacen { get; private  set; } 
         public int IdTenant { get; private set; } 
         public string Nombre { get; private set; } 
-        public string?Descripcion { get; private set; }
+        public string ?Descripcion { get; private set; }
         public bool EsPrincipal { get; private set; } 
         public bool Activo { get; private set; } 
         public DateTime FechaCreacion { get; private set; } 
@@ -25,6 +25,7 @@ namespace PymeTech.Domain.Entities
         public ICollection<Inventario> Inventarios { get; private set; } = new List<Inventario>();
         public ICollection<MovimientosInventario> MovimientosInventario { get; private set; } = new List<MovimientosInventario>();
 
+        public ICollection<Compra> Compras { get; private set; } = new List<Compra>();
         public ICollection<Venta> Ventas { get; private set; } = new List<Venta>(); 
 
 

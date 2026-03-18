@@ -37,8 +37,9 @@ namespace PymeTech.Domain.Entities
 
 
         //Un producto puede estar en varios inventarios (en diferentes almacenes) y puede estar presente en varios detalles de compra y venta, por lo que se definen estas colecciones para representar esas relaciones
-        public ICollection<Inventario> Inventarios { get; private set; } = new List<Inventario>(); 
-        public ICollection<MovimientosInventario> MovimientosDeInventario { get; private set; } = new List<MovimientosInventario>(); 
+        public ICollection<Inventario> Inventarios { get; private set; } = new List<Inventario>();
+        public ICollection<MovimientosInventario> MovimientosDeInventario { get; private set; } = new List<MovimientosInventario>();
+        public ICollection<VentaDetalle> VentasDetalle { get; private set; } = new List<VentaDetalle>();
 
 
 
@@ -62,30 +63,31 @@ namespace PymeTech.Domain.Entities
 
             IdTenant = idTenant;
             IdCategoria = idCategoria;
-            Codigo = codigo; 
-            Nombre = nombre; 
-            Descripcion = descripcion; 
-            UnidadMedida = unidadMedida; 
-            PrecioVenta = precioVenta; 
-            PrecioCompra = precioCompra; 
-            IvaIncluido = ivaIncluido; 
-            PorcentajeIva = porcentajeIva; 
-            EsServicio = esServicio; 
-            Activo = true; 
-            FechaCreacion = DateTime.UtcNow; 
-            FechaCreacion = DateTime.UtcNow; 
-            CreadoPor = creadoPor; 
-            ActualizadoPor = actualizadoPor; 
+            Codigo = codigo;
+            Nombre = nombre;
+            Descripcion = descripcion;
+            UnidadMedida = unidadMedida;
+            PrecioVenta = precioVenta;
+            PrecioCompra = precioCompra;
+            IvaIncluido = ivaIncluido;
+            PorcentajeIva = porcentajeIva;
+            EsServicio = esServicio;
+            Activo = true;
+            FechaCreacion = DateTime.UtcNow;
+            FechaActualizacion = DateTime.UtcNow;
+            CreadoPor = creadoPor;
+            ActualizadoPor = actualizadoPor;
 
 
         }
 
 
-        public void Desactivar(int actualizadoPor ) {
+        public void Desactivar(int actualizadoPor)
+        {
 
-            Activo = false; 
-            FechaActualizacion = DateTime.UtcNow ;
-            ActualizadoPor = actualizadoPor; 
+            Activo = false;
+            FechaActualizacion = DateTime.UtcNow;
+            ActualizadoPor = actualizadoPor;
 
 
         }

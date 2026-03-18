@@ -10,18 +10,18 @@ namespace PymeTech.Domain.Entities
     {
 
         // Tabla con 4 Relaciones Tenant , Rol , Permiso y usuarios
-        public int  IdTenant { get; private set; }  
-        public int IdRol { get; private set; } 
-        public int IdPermiso { get; private set; }  
-        public DateTime FechaAsignado { get; private set; } 
-        public int? AsignadoPor {get; private set; }
+        public int IdTenant { get; private set; }
+        public int IdRol { get; private set; }
+        public int IdPermiso { get; private set; }
+        public DateTime FechaAsignado { get; private set; }
+        public int? AsignadoPor { get; private set; }
 
         //referencias 
         public Tenant Tenant { get; private set; }
-        public Rol Rol { get; private set; } 
-        public Permisos Permiso { get; private set; } 
-        public Usuario UsuarioAsignado { get; private set; } 
-            
+        public Rol Rol { get; private set; }
+        public Permisos Permiso { get; private set; }
+        public Usuario UsuarioAsignado { get; private set; }
+
 
 
         private RolPermiso() { }

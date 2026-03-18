@@ -15,7 +15,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
         {
             builder.ToTable("Permisos");
             builder.HasKey(x => x.IdPermiso);
-            builder.Property(x=> x.Modulo).HasColumnType("varchar(50)").IsRequired();
+            builder.Property(x => x.Modulo).HasColumnType("varchar(50)").IsRequired();
             builder.Property(x => x.Accion).HasColumnType("varchar(30)").IsRequired();
             builder.Property(x => x.Descripcion).HasColumnType("varchar(200)").IsRequired(false);
 

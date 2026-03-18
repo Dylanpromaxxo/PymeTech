@@ -17,7 +17,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(x=> x.NombreRol).HasColumnType("varchar(100)").IsRequired(); 
             builder.Property(x=> x.Descripcion).HasColumnType("varchar(255)").IsRequired(false);
             builder.Property(x=> x.Activo).HasColumnType("bit").HasDefaultValue(true);
-            builder.Property(x=> x.FechaCreacion).HasColumnType("datetime").HasDefaultValueSql("GETDATE()");
+            builder.Property(x=> x.FechaCreacion).HasColumnType("datetime2").HasDefaultValueSql("GETDATE()");
 
 
             builder.HasIndex(r => new { r.IdTenant, r.NombreRol });

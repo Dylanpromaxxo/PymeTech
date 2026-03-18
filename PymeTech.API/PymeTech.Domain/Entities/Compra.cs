@@ -34,7 +34,7 @@ namespace PymeTech.Domain.Entities
         public DateTime FechaActualizacion { get; private set; }
 
         public int CreadoPor { get; private set; }
-        public int ActualizadoPor { get; private set; }
+        public int? ActualizadoPor { get; private set; }
 
         // Referencias a otras entidades
         public Tenant Tenant { get; private set; }

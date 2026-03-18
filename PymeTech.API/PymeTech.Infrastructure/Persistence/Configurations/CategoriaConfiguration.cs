@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using PymeTech.Domain.Entities;
 
 namespace PymeTech.Infrastructure.Persistence.Configurations
 {
-    public  class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
+    public class CategoriaConfiguration : IEntityTypeConfiguration<Categoria>
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
@@ -25,24 +25,24 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(c => c.CreadoPor).HasColumnType("Int");
 
 
-                builder.HasOne(c => c.Tenant)
-                    .WithMany()
-                    .HasForeignKey(c => c.IdTenant)
-                    .OnDelete(DeleteBehavior.Restrict); 
+            builder.HasOne(c => c.Tenant)
+                .WithMany()
+                .HasForeignKey(c => c.IdTenant)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
-                builder.HasOne(c => c.CreadorCategoria)
-                    .WithMany(c=> c.CategoriasCreadas)
-                    .HasForeignKey(c => c.CreadoPor)
-                    .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(c => c.CreadorCategoria)
+                .WithMany(c => c.CategoriasCreadas)
+                .HasForeignKey(c => c.CreadoPor)
+                .OnDelete(DeleteBehavior.Restrict);
 
-                builder.HasIndex(c => new { c.IdTenant, c.Nombre }).IsUnique(); 
-                builder.HasIndex(c => new { c.IdTenant, c.IdCategoria }).IsUnique();
-                builder.HasIndex(c => c.IdTenant ); 
+            builder.HasIndex(c => new { c.IdTenant, c.Nombre }).IsUnique();
+            builder.HasIndex(c => new { c.IdTenant, c.IdCategoria }).IsUnique();
+            builder.HasIndex(c => c.IdTenant);
 
 
 
         }
-    
+
     }
 }

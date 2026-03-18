@@ -22,8 +22,8 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(x=> x.IdTenant).HasColumnType("int").IsRequired(); 
             builder.Property(x=> x.IdRol).HasColumnType("int").IsRequired();
             builder.Property(x=> x.IdPermiso).HasColumnType("int").IsRequired();
-                builder.Property(x=> x.FechaAsignado).HasColumnType("datetime").IsRequired();
-            builder.Property(x=> x.AsignadoPor).HasColumnType("int").IsRequired();
+                builder.Property(x=> x.FechaAsignado).HasColumnType("datetime2").IsRequired().HasDefaultValueSql("GETDATE()");
+                builder.Property(x=> x.AsignadoPor).HasColumnType("int").IsRequired(false);
 
             // relaciones 
 
@@ -35,7 +35,8 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
                 builder.HasOne(x => x.Rol)
                     .WithMany(x=> x.RolPermisos)
                     .HasForeignKey(x => x.IdRol)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_RolPermiso_Rol");
 
                 builder.HasOne(x=>x.Permiso)
                     .WithMany(x=> x.RolPermisos)

@@ -10,15 +10,15 @@ namespace PymeTech.Domain.Entities
     public class Permisos
     {
         public int IdPermiso { get; private set; }
-        public string Modulo { get; private set; } 
+        public string Modulo { get; private set; }
         public string Accion { get; private set; }
-        public string ? Descripcion { get; private set; } 
+        public string? Descripcion { get; private set; }
 
         public ICollection<RolPermiso> RolPermisos { get; private set; } = new List<RolPermiso>();
 
 
 
-        private Permisos() { }  
+        private Permisos() { }
 
         public Permisos(string modulo, string accion, string? descripcion = null)
         {
@@ -29,6 +29,6 @@ namespace PymeTech.Domain.Entities
             Modulo = modulo;
             Accion = accion;
             Descripcion = descripcion;
-        }   
+        }
     }
 }

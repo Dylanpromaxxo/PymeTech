@@ -23,19 +23,19 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(x=> x.IdUsuario).HasColumnType("int").IsRequired();
             builder.Property(x=> x.NumeroDocumento).HasColumnType("varchar(20)").IsRequired();
             builder.Property(x=> x.TipoDocumento).HasColumnType("varchar(15)").IsRequired();
-            builder.Property(x=> x.FechaEmision).HasColumnType("datetime").IsRequired();
+            builder.Property(x=> x.FechaEmision).HasColumnType("datetime2").IsRequired();
             builder.Property(x=> x.FechaVencimiento).HasColumnType("date").IsRequired(false);
             builder.Property(x=> x.Estado).HasColumnType("varchar(15)").IsRequired();
             builder.Property(x=> x.Subtotal).HasColumnType("decimal(14,2)").IsRequired().HasDefaultValue(0);
             builder.Property(x=> x.TotalDescuento).HasColumnType("decimal(14,2)").IsRequired().HasDefaultValue(0);
             builder.Property(x=> x.TotalIva).HasColumnType("decimal(14,2)").IsRequired().HasDefaultValue(0);
             builder.Property(x=> x.Total).HasColumnType("decimal(14,2)").IsRequired().HasDefaultValue(0);
-            builder.Property(x=> x.MonedaIso).HasColumnType("char(3)").IsRequired();
+            builder.Property(x=> x.MonedaISO).HasColumnType("char(3)").IsRequired();
             builder.Property(x=> x.TipoCambio).HasColumnType("decimal(10,4)").IsRequired().HasDefaultValue(1.0000);
             builder.Property(x=> x.Notas).HasColumnType("varchar(500)").IsRequired(false);
-            builder.Property(x=> x.FechaCracion).HasColumnType("datetime").IsRequired();
-            builder.Property(x=> x.FechaActualizacion).HasColumnType("datetime").IsRequired(false);
-            builder.Property(x=> x.CraadoPor).HasColumnType("int").IsRequired();
+            builder.Property(x=> x.FechaCreacion).HasColumnType("datetime2").IsRequired();
+            builder.Property(x=> x.FechaActualizacion).HasColumnType("datetime2").IsRequired();
+            builder.Property(x=> x.CreadoPor).HasColumnType("int").IsRequired();
             builder.Property(x=> x.ActualizadoPor).HasColumnType("int").IsRequired(false);
 
 
@@ -47,7 +47,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
 
             builder.HasOne(c=> c.Clientes)
                 .WithMany(x=> x.Ventas)
-                .HasForeignKey(f=> f.IdCliente)
+                .HasForeignKey(f=> f.IdCliente )
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Venta_Clientes");
 
@@ -65,7 +65,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
 
             builder.HasOne(u=> u.CreadorVenta)
                 .WithMany()
-                .HasForeignKey(f=> f.CraadoPor)
+                .HasForeignKey(f=> f.CreadoPor)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Venta_CreadorVenta"); 
             
@@ -75,9 +75,8 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("FK_Venta_ActualizadorVenta");
 
-            builder.HasIndex(c => new { c.NumeroDocumento, c.Tenant }).IsUnique();
-            builder.HasIndex(c => new { c.IdVenta, c.IdTenant }).IsUnique() ;
-
+            builder.HasIndex(c => new { c.IdTenant, c.NumeroDocumento }).IsUnique();
+            builder.HasIndex(c => new { c.IdTenant, c.IdVenta }).IsUnique();
 
             builder.HasIndex(c => c.IdTenant); 
             builder.HasIndex (c => new {c.IdTenant , c.IdCliente  });

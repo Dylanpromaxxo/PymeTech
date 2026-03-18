@@ -8,7 +8,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Compra> builder)
         {
-           
+
             builder.ToTable("Compra");
 
             builder.HasKey(k => k.IdCompra).HasName("PK_Compra_IdCompra");
@@ -92,7 +92,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
 
             builder.Property(p => p.ActualizadoPor)
                 .HasColumnType("int")
-                .IsRequired();
+                .IsRequired(false);
 
             // Relaciones
             builder.HasOne(c => c.Tenant)
@@ -102,18 +102,18 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Restrict); ;
 
             builder.HasOne(c => c.Proveedor)
-                .WithMany(c=> c.Compras )
+                .WithMany(c => c.Compras)
                 .HasForeignKey(fk => fk.IdProveedor)
                 .HasConstraintName("FK_Compra_Proveedor");
 
             builder.HasOne(c => c.Almacen)
-                .WithMany()
-                .HasForeignKey(fk => fk.IdAlmacen)
+                .WithMany(x => x.Compras)
+                .HasForeignKey(fk =>  fk.IdAlmacen )
                 .HasConstraintName("FK_Compra_Almacen");
 
             builder.HasOne(c => c.Usuario)
                 .WithMany()
-                .HasForeignKey(fk => fk.IdUsuario)
+                .HasForeignKey(fk => fk.IdUsuario )
                 .HasConstraintName("FK_Compra_Usuario");
 
             builder.HasOne(c => c.CreadorCompra)
@@ -129,7 +129,14 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             // indice único: no puede haber dos compras con el mismo número de documento en el mismo tenant
             builder.HasIndex(u => new { u.IdTenant, u.NumeroDocumento })
                 .IsUnique()
-                .HasDatabaseName("UQ_Compra_NumeroDocumento");
+                .HasDatabaseName("UQ_Compra_NumDoc");
+            builder.HasIndex(x => new { x.IdTenant, x.IdCompra }).IsUnique();
+
+
+            builder.HasIndex(x => new { x.IdTenant });
+            builder.HasIndex(x => new { x.IdTenant, x.IdProveedor });
+            builder.HasIndex(x => new { x.IdTenant, x.FechaEmision });
+            builder.HasIndex(x => new { x.IdTenant, x.IdCompra });
         }
     }
 }

@@ -17,18 +17,18 @@ namespace PymeTech.Domain.Entities
         public string NumeroDocumento { get; private set; }
         public string TipoDocumento { get; private set; }
         public DateTime FechaEmision { get; private set; }
-        public DateOnly FechaVencimiento { get; private set; }
+        public DateOnly? FechaVencimiento { get; private set; }
         public string Estado { get; private set; } // Activo, Anulado, etc.
         public decimal Subtotal { get; private set; }
         public decimal TotalDescuento { get; private set; }
         public decimal TotalIva { get; private set; }
         public decimal Total { get; private set; }
-        public char MonedaIso { get; private set; } // S: Soles, D: Dólares, etc.
-        public string TipoCambio { get; private set; } // Tipo de cambio utilizado en la venta
+        public string MonedaISO { get; private set; } // 3-letter ISO currency code
+        public decimal TipoCambio { get; private set; } // Tipo de cambio utilizado en la venta
         public string? Notas { get; private set; }
-        public DateTime FechaCracion { get; private set; }
+        public DateTime FechaCreacion { get; private set; }
         public DateTime FechaActualizacion { get; private set; }
-        public int CraadoPor { get; private set; }
+        public int CreadoPor { get; private set; }
         public int? ActualizadoPor { get; private set; }
 
 
@@ -42,13 +42,14 @@ namespace PymeTech.Domain.Entities
         public Usuario CreadorVenta { get; private set; }
         public Usuario ActualizadorVenta { get; private set; }
 
-        public ICollection<VentaDetalle> VentaDetalles { get; private set; } = new List<VentaDetalle>() {
+        public ICollection<VentaDetalle> VentaDetalles { get; private set; } = new List<VentaDetalle>()
+        {
         };
 
         private Venta() { }
 
 
-        public Venta(int idTenant, int idCliente, int idAlmacen, int idUsuario, string numeroDocumento, string tipoDocumento, DateTime fechaEmision, DateOnly fechaVencimiento, string estado, decimal subtotal, decimal totalDescuento, decimal totalIva, decimal total, char monedaIso, string tipoCambio, string? notas, int creadoPor, int? actualizadopor)
+        public Venta(int idTenant, int idCliente, int idAlmacen, int idUsuario, string numeroDocumento, string tipoDocumento, DateTime fechaEmision, DateOnly fechaVencimiento, string estado, decimal subtotal, decimal totalDescuento, decimal totalIva, decimal total, string monedaIso, decimal tipoCambio, string? notas, int creadoPor, int? actualizadopor)
         {
             if (string.IsNullOrWhiteSpace(numeroDocumento))
                 throw new ArgumentException("El número de documento no puede estar vacío");
@@ -76,12 +77,12 @@ namespace PymeTech.Domain.Entities
             TotalDescuento = totalDescuento;
             TotalIva = totalIva;
             Total = total;
-            MonedaIso = monedaIso;
+            MonedaISO = monedaIso;
             TipoCambio = tipoCambio;
             Notas = notas;
-            FechaCracion = DateTime.UtcNow;
+            FechaCreacion = DateTime.UtcNow;
             FechaActualizacion = DateTime.UtcNow;
-            CraadoPor = creadoPor;
+            CreadoPor = creadoPor;
             ActualizadoPor = actualizadopor;
 
 

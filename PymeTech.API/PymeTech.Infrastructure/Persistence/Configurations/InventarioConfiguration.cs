@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
-using PymeTech.Domain.Entities; 
+using PymeTech.Domain.Entities;
 
 namespace PymeTech.Infrastructure.Persistence.Configurations
 {
-    public class InventarioConfiguration: IEntityTypeConfiguration<Inventario>
+    public class InventarioConfiguration : IEntityTypeConfiguration<Inventario>
     {
         public void Configure(EntityTypeBuilder<Inventario> builder)
         {
@@ -22,7 +22,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(i => i.IdAlmacen).IsRequired();
             builder.Property(i => i.StockActual).HasColumnType("decimal(12,3)").IsRequired();
             builder.Property(i => i.StockMinimo).HasColumnType("decimal(12,3)").IsRequired();
-            builder.Property(i => i.StockMaximo).HasColumnType("decimal(12,3)"); 
+            builder.Property(i => i.StockMaximo).HasColumnType("decimal(12,3)");
             builder.Property(i => i.FechaActualizacion).IsRequired().HasDefaultValueSql("GetDate()");
 
             builder.HasOne(i => i.Tenant)
@@ -32,21 +32,21 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
                    .HasConstraintName("FK_Inv_Tenant");
 
             builder.HasOne(i => i.Producto)
-                   .WithMany(i => i.Inventarios)
-                   .HasForeignKey(i => i.IdProducto)
-                   .OnDelete(DeleteBehavior.Restrict)
-                   .HasConstraintName("FK_Inv_Producto");
+                .WithMany(i => i.Inventarios)
+                .HasForeignKey(i => i.IdProducto)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Inv_Producto");
 
             builder.HasOne(i => i.Almacen)
-                   .WithMany(i => i.Inventarios)
-                   .HasForeignKey(i => i.IdAlmacen)
-                   .OnDelete(DeleteBehavior.Restrict)
-                   .HasConstraintName("FK_Inv_Almacen");
+                .WithMany(i => i.Inventarios)
+                .HasForeignKey(i =>  i.IdAlmacen )
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_Inv_Almacen");
 
             builder.HasIndex(x => new { x.IdTenant, x.IdProducto, x.IdAlmacen }).IsUnique();
 
             builder.HasIndex(x => new { x.IdTenant, x.IdProducto });
-            builder.HasIndex(x => new { x.IdTenant, x.IdAlmacen }); 
+            builder.HasIndex(x => new { x.IdTenant, x.IdAlmacen });
 
         }
 
