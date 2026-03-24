@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PymeTech.Application.Feature.Productos.Commands
+namespace PymeTech.Application.Feature.Productos.Queries
 {
-    internal class GetProductosQuery
+    internal class GetProductosHandler
     {
     }
 }

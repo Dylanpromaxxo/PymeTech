@@ -1,7 +1,11 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-
+using PymeTech.Application.Common.Interfaces;
+using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Infrastructure.Persistence;
+using PymeTech.Infrastructure.Persistence.Repositories;
+using PymeTech.Infrastructure.Persistence.Repositories;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +16,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMediatR(cgf => cgf.RegisterServicesFromAssembly(typeof(GetAllTenantsHandler).Assembly));
+builder.Services.AddValidatorsFromAssembly(typeof(GetAllTenantsValidator).Assembly);
+
+builder.Services.AddScoped<ITenantRepository, TenantRepository>(); 
+
+
 
 builder.Services.AddDbContext<AppDbContext>(opcion => opcion.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddMediatR(cfg =>
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 var app = builder.Build();
 

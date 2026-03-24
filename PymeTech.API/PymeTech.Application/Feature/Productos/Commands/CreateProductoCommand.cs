@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PymeTech.Application.Feature.Productos.Commands
 {
-    internal class ProductosDtos
+    internal class CreateProductoCommand
     {
     }
 }

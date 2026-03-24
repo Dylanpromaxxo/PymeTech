@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PymeTech.Infrastructure.Persistence;
 
 namespace PymeTech.API.Controllers
@@ -19,7 +20,7 @@ namespace PymeTech.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var tenants = _dbContext.Permisos.ToList();
+            var tenants = _dbContext.Tenants.ToListAsync();
             return Ok(tenants);
         }
     }
