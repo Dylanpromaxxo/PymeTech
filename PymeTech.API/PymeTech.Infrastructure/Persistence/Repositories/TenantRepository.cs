@@ -35,5 +35,11 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
         {
             return await _context.Tenants.FirstOrDefaultAsync(c => c.IdTenant == id, cn);
         }
+
+        public async Task UpdateAsync(Tenant tenant, CancellationToken cn)
+        {
+            _context.Tenants.Update(tenant); 
+            await _context.SaveChangesAsync(cn);
+        }
     }
 }

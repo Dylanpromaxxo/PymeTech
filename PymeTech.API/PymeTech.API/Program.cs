@@ -1,10 +1,11 @@
 using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PymeTech.Application.Common.Interfaces;
 using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Infrastructure.Persistence;
 using PymeTech.Infrastructure.Persistence.Repositories;
-using PymeTech.Infrastructure.Persistence.Repositories;
+using PymeTech.Application.Common.Behaviours;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +20,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cgf => cgf.RegisterServicesFromAssembly(typeof(GetAllTenantsHandler).Assembly));
 builder.Services.AddValidatorsFromAssembly(typeof(GetAllTenantsValidator).Assembly);
 
-builder.Services.AddScoped<ITenantRepository, TenantRepository>(); 
+builder.Services.AddScoped<ITenantRepository, TenantRepository>();
 
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
 
 builder.Services.AddDbContext<AppDbContext>(opcion => opcion.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

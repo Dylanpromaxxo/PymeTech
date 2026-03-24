@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PymeTech.Application.Feature.Tenants.Commands
+namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
 {
     public record CreateTenantCommand : IRequest<int>
     {

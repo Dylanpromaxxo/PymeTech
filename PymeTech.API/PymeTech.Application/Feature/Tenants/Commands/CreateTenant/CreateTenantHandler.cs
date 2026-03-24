@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace PymeTech.Application.Feature.Tenants.Commands
+namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
 {
     public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, int>
     {

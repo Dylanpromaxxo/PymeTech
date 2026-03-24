@@ -46,6 +46,13 @@ namespace PymeTech.Domain.Entities
             Activo = false;
         }
 
+        public void ActualizarDatos(string nombre , string email , string telefono ) 
+        {
+            Nombre = nombre; 
+            Email = email; 
+            Telefono = telefono; 
+        }
+
 
 
     }

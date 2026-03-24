@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PymeTech.Application.Feature.Tenants.Commands;
+using PymeTech.Application.Feature.Tenants.Commands.CreateTenant;
+using PymeTech.Application.Feature.Tenants.Commands.UpdateTenant;
 using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Application.Feature.Tenants.Queries.GetTenantsById;
 using PymeTech.Domain.Entities;
@@ -39,6 +40,22 @@ namespace PymeTech.API.Controllers
         {
             var id = await _mediator.Send(command, ct);
             return CreatedAtAction(nameof(GetById), new { id }, new { IdTenant = id });
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id ,  [FromBody] UpdateTenantCommand command , CancellationToken ct) 
+        {
+            if (id != command.IdTenant) 
+            {
+                return BadRequest("El id no coincide ");
+            }
+            var result = await _mediator.Send(command with {IdTenant = id }, ct);
+            return Ok(result);
+
+
+
+
+
+        
         }
 
     }
