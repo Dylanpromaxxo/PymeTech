@@ -6,6 +6,7 @@ using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Infrastructure.Persistence;
 using PymeTech.Infrastructure.Persistence.Repositories;
 using PymeTech.Application.Common.Behaviours;
+using PymeTech.API.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,12 +18,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//inyeccion de dependencias de MediaTr y Validetion IPipelineBehavior
 builder.Services.AddMediatR(cgf => cgf.RegisterServicesFromAssembly(typeof(GetAllTenantsHandler).Assembly));
 builder.Services.AddValidatorsFromAssembly(typeof(GetAllTenantsValidator).Assembly);
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+
+
+
 
 builder.Services.AddScoped<ITenantRepository, TenantRepository>();
 
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
 
 
 builder.Services.AddDbContext<AppDbContext>(opcion => opcion.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -42,10 +50,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+//Aplicacion del Middleware 
+app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 app.Run();

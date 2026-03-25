@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Common\Exceptions\" />
+    <Folder Include="Feature\PermisosG\Commands\CreatePermisos\" />
+    <Folder Include="Feature\PermisosG\Queries\" />
   </ItemGroup>
 
 </Project>
