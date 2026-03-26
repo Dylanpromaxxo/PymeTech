@@ -30,6 +30,8 @@ namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
                  telefono: request.Telefono
                 );
 
+
+           
             return await _repositorio.AddAsync(tenant, cancellationToken); 
         }
     }

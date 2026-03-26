@@ -32,7 +32,6 @@ builder.Services.AddScoped<ITenantRepository, TenantRepository>();
 
 
 
-
 builder.Services.AddDbContext<AppDbContext>(opcion => opcion.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 

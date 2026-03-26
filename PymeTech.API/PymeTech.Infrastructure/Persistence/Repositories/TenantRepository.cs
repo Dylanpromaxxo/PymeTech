@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PymeTech.Application.Common.Interfaces;
 using PymeTech.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PymeTech.Infrastructure.Persistence.Repositories
 {
@@ -24,6 +20,12 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
             await _context.SaveChangesAsync(cn);
             return tenant.IdTenant;
 
+        }
+
+        public async Task DeleteAsync(Tenant tenant, CancellationToken cn)
+        {
+            _context.Tenants.Remove(tenant);
+            await _context.SaveChangesAsync(cn);
         }
 
         public async Task<IReadOnlyList<Tenant>> GetAllAsync(CancellationToken cn)

@@ -1,6 +1,6 @@
 ﻿using PymeTech.API.Common;
 using PymeTech.Application.Common.Exceptions;
-using FluentValidation;                        // ← solo este, sin DataAnnotations
+using FluentValidation;                      
 using System.Net;
 using System.Text.Json;
 

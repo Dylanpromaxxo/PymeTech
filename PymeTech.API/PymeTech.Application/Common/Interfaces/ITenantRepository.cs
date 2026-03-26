@@ -13,5 +13,6 @@ namespace PymeTech.Application.Common.Interfaces
         public Task<Tenant?> GetByIdAsync(int id ,  CancellationToken cn);
         public Task<int> AddAsync(Tenant tenant, CancellationToken cn);
         public Task UpdateAsync(Tenant tenant, CancellationToken cn); 
+        public Task DeleteAsync(Tenant tenant , CancellationToken cn ); 
     }
 }

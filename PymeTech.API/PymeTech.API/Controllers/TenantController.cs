@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PymeTech.API.Common;
 using PymeTech.Application.Feature.Tenants.Commands.CreateTenant;
+using PymeTech.Application.Feature.Tenants.Commands.DeleteTenant;
+using PymeTech.Application.Feature.Tenants.Commands.DesactivarTenant;
 using PymeTech.Application.Feature.Tenants.Commands.UpdateTenant;
 using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Application.Feature.Tenants.Queries.GetTenantsById;
@@ -38,29 +40,41 @@ namespace PymeTech.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateTenantCommand command , CancellationToken ct) 
+        public async Task<IActionResult> Create([FromBody] CreateTenantCommand command, CancellationToken ct)
         {
-            var id = await _mediator.Send(command , ct);
+            var id = await _mediator.Send(command, ct);
             return Ok(ApiResponse<int>.Ok(id, "Tenant Creado Exitosamente"));
 
-         
+
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id ,  [FromBody] UpdateTenantCommand command , CancellationToken ct) 
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateTenantCommand command, CancellationToken ct)
         {
-            if (id != command.IdTenant) 
+            if (id != command.IdTenant)
             {
                 return BadRequest("El id no coincide ");
             }
-            var result = await _mediator.Send(command with {IdTenant = id }, ct);
-            return Ok(ApiResponse<bool>.Ok(result ,"Tenant Actualizado Exitosamente"));
+            var result = await _mediator.Send(command with { IdTenant = id }, ct);
+            return Ok(ApiResponse<bool>.Ok(result, "Tenant Actualizado Exitosamente"));
 
-
-
-
-
-        
         }
 
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id, CancellationToken ct)
+        {
+            var result = await _mediator.Send(new DeleteTenantCommand { IdTenant= id  } , ct );
+            return Ok(ApiResponse<bool>.Ok(result, "Tenant Eliminado Correctamente"));
+        }
+
+
+        [HttpPatch("{id}/desctivar")]
+        public async Task<IActionResult> Desactivar(int id, CancellationToken ct) 
+        {
+            var respuesta = await _mediator.Send(new DesactivarTenantCommand { IdTenant = id }, ct);
+            return Ok(ApiResponse<bool>.Ok(respuesta, "Tenant desctivado Correctamente ")); 
+
+        }
     }
 }
+ 
