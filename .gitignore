@@ -1,3 +1,27 @@
 .vs/
 bin/
 obj/
+
+# App settings sensibles
+
+appsettings.Development.json
+appsettings.Production.json
+
+# Archivos de entorno
+
+.env
+
+# Logs
+
+logs/
+*.log
+
+# Rider / VSCode
+
+.vscode/
+.idea/
+
+# OS
+
+.DS_Store
+Thumbs.db
