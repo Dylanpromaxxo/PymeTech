@@ -36,14 +36,14 @@ namespace PymeTech.Domain.Entities
         }
 
 
-        public void CambiarPlan(string nuevoPlan)
+        public void ChangePlan(string nuevoPlan)
         {
             PlanSuscripcion = nuevoPlan;
         }
 
-        public void Desactivar()
+        public void ChangeStatus()
         {
-            Activo = false;
+            Activo = !Activo;
         }
 
         public void ActualizarDatos(string nombre , string email , string telefono ) 

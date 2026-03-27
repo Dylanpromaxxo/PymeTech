@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using PymeTech.API.Common;
 using PymeTech.Application.Feature.Tenants.Commands.CreateTenant;
 using PymeTech.Application.Feature.Tenants.Commands.DeleteTenant;
-using PymeTech.Application.Feature.Tenants.Commands.DesactivarTenant;
+using PymeTech.Application.Feature.Tenants.Commands.ChangeStatusTenan;
 using PymeTech.Application.Feature.Tenants.Commands.UpdateTenant;
 using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Application.Feature.Tenants.Queries.GetTenantsById;
+using PymeTech.Application.Feature.Tenants.Queries.GetTenantsDesctivados;
+using PymeTech.Application.Feature.Tenants.Commands.ChangePlan;
 using PymeTech.Application.Feature.Tenants.TenantDTOs;
 using PymeTech.Domain.Entities;
 
@@ -30,7 +32,14 @@ namespace PymeTech.API.Controllers
             var result = await _mediator.Send(new GetAllTenantsQuery(), ct);
             return Ok(ApiResponse<List<TenantDTO>>.Ok(result));
         }
+        [HttpGet("disabled")]
+        public async Task<IActionResult> GetDesabled(CancellationToken ct)
+        {
+            var result = await _mediator.Send(new GetTenantDesactivadosQuery(), ct);
+            return Ok(ApiResponse<List<TenantDTO>>.Ok(result));
 
+
+        }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id, CancellationToken ct)
@@ -63,18 +72,30 @@ namespace PymeTech.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id, CancellationToken ct)
         {
-            var result = await _mediator.Send(new DeleteTenantCommand { IdTenant= id  } , ct );
+            var result = await _mediator.Send(new DeleteTenantCommand { IdTenant = id }, ct);
             return Ok(ApiResponse<bool>.Ok(result, "Tenant Eliminado Correctamente"));
         }
 
 
-        [HttpPatch("{id}/desctivar")]
-        public async Task<IActionResult> Desactivar(int id, CancellationToken ct) 
+        [HttpPatch("{id}/ChangeStatus")]
+        public async Task<IActionResult> ChangeStatus(int id, CancellationToken ct)
         {
             var respuesta = await _mediator.Send(new DesactivarTenantCommand { IdTenant = id }, ct);
-            return Ok(ApiResponse<bool>.Ok(respuesta, "Tenant desctivado Correctamente ")); 
+
+            return Ok(ApiResponse<bool>.Ok(respuesta));
 
         }
+
+        [HttpPatch("ChangePlan")]
+        public async Task<IActionResult> ChangePlan([FromBody] ChangePlanTenantCommand command, CancellationToken ct) 
+        {
+            var result = await _mediator.Send(command, ct);
+            return Ok(ApiResponse<bool>.Ok(result));
+        
+        
+        } 
+
+
     }
 }
  

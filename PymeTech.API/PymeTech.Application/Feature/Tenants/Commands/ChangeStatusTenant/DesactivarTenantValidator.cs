@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PymeTech.Application.Feature.Tenants.Commands.DesactivarTenant
+namespace PymeTech.Application.Feature.Tenants.Commands.ChangeStatusTenan
 {
     public class DesactivarTenantValidator : AbstractValidator<DesactivarTenantCommand>
     {

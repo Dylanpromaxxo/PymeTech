@@ -38,6 +38,12 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
             return await _context.Tenants.FirstOrDefaultAsync(c => c.IdTenant == id, cn);
         }
 
+        public async Task<IReadOnlyList<Tenant>> GetDisableAsync(CancellationToken cn)
+        {
+          return await _context.Tenants.Where(ac=> !ac.Activo).OrderBy(n=> n.Nombre).ToListAsync(cn);
+
+        }
+
         public async Task UpdateAsync(Tenant tenant, CancellationToken cn)
         {
             _context.Tenants.Update(tenant); 

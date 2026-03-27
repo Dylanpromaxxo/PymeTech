@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PymeTech.Application.Common.Exceptions;
 
-namespace PymeTech.Application.Feature.Tenants.Commands.DesactivarTenant
+namespace PymeTech.Application.Feature.Tenants.Commands.ChangeStatusTenan
 {
     public class DesactivarTenantHandler : IRequestHandler<DesactivarTenantCommand, bool>
     {
@@ -28,7 +28,7 @@ namespace PymeTech.Application.Feature.Tenants.Commands.DesactivarTenant
             {
                 throw new NotFoundException("Tenant", request.IdTenant); 
             }
-            tenant.Desactivar();
+            tenant.ChangeStatus();
 
 
             await _repository.UpdateAsync(tenant, cancellationToken);
