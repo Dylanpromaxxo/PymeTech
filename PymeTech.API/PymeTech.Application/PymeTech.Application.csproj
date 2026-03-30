@@ -16,8 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feature\PermisosG\Commands\CreatePermisos\" />
-    <Folder Include="Feature\PermisosG\Queries\" />
+    <Folder Include="Feature\PermisosGlobales\Commands\CreatePermisos\" />
   </ItemGroup>
 
 </Project>
