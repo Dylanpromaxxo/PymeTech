@@ -15,8 +15,4 @@
     <ProjectReference Include="..\PymeTech.Domain\PymeTech.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Feature\PermisosGlobales\Commands\CreatePermisos\" />
-  </ItemGroup>
-
 </Project>

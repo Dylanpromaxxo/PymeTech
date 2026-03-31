@@ -24,7 +24,7 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
 
         public async Task DeleteAsync(Tenant tenant, CancellationToken cn)
         {
-            _context.Tenants.Remove(tenant);
+             _context.Tenants.Remove(tenant);
             await _context.SaveChangesAsync(cn);
         }
 

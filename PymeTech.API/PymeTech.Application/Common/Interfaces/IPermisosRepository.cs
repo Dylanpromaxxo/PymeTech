@@ -13,6 +13,9 @@ namespace PymeTech.Application.Common.Interfaces
     {
         public Task<IReadOnlyList<Permisos>> GetAllAsync(CancellationToken ct);
         public Task<Permisos?> GetByIdAsync(int id, CancellationToken ct);
+        public Task<IReadOnlyList<Permisos>> GetByModuloAsync(string modulo , string? accion , CancellationToken ct);
+        public Task<int> AddAsync(Permisos permisos, CancellationToken ct); 
+        public Task DeleteAsync(Permisos permisos , CancellationToken ct ); 
 
     }
 }
