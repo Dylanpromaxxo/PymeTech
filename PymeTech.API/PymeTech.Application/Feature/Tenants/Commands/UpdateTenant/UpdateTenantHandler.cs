@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PymeTech.Application.Common.Exceptions;
 
 namespace PymeTech.Application.Feature.Tenants.Commands.UpdateTenant
 {
@@ -26,7 +27,7 @@ namespace PymeTech.Application.Feature.Tenants.Commands.UpdateTenant
             var QueryTenant = await _repositories.GetByIdAsync(request.IdTenant, cancellationToken);
             if (QueryTenant == null) 
             {
-                throw new Exception("Tenant = 0"); 
+                throw new NotFoundException("Tenant" , request.IdTenant); 
             }
 
             QueryTenant.ActualizarDatos(

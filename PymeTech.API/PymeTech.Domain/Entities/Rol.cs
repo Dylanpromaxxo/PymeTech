@@ -38,11 +38,17 @@ namespace PymeTech.Domain.Entities
             FechaCreacion = DateTime.UtcNow;
 
         }
-
-
-        public void Desactivar()
+        public void Update(string nombreRol, string descripcion)
         {
-            Activo = false;
+            if (string.IsNullOrWhiteSpace(nombreRol))
+                throw new ArgumentException("El nombre del rol no puede estar vacío");
+            NombreRol = nombreRol;
+            Descripcion = descripcion;
+        } 
+
+        public void ChangeStatus()
+        {
+            Activo = !Activo ;
         }
     }
 }
