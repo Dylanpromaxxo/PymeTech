@@ -1,4 +1,4 @@
-﻿using Azure.Core;
+﻿
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -9,6 +9,9 @@ using PymeTech.Application.Feature.roles.Commands.CreateRol;
 using PymeTech.Application.Feature.roles.Commands.UpdateRol;
 using PymeTech.Application.Feature.roles.Queries.GetRolesbyIdTenant;
 using PymeTech.Application.Feature.roles.rolesDTOs;
+using PymeTech.Application.Feature.roles.RolPermisoss.Command.AssignPermission;
+using PymeTech.Application.Feature.roles.RolPermisoss.Command.RemovePermission;
+using System.Security.Cryptography;
 
 namespace PymeTech.API.Controllers
 {
@@ -38,16 +41,12 @@ namespace PymeTech.API.Controllers
             return Ok(ApiResponse<int>.Ok(id, "Rol Creado Exitosamente"));
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateRol (int id ,  [FromBody] UpdateRolCommand command , CancellationToken  ct)
+        [HttpPut("{idTenant}/{idRol}")]
+        public async Task<IActionResult> UpdateRol (int idRol, int idTenant,  [FromBody] UpdateRolRequest request , CancellationToken  ct)
         {
-            if (command.IdRol != id)
-            {
-                return BadRequest(ApiResponse<string>.Fail("El Id del Rol no coincide con el Id de la ruta"));
-            }
-            var result = await _mediator.Send (command, ct);
-            return Ok(ApiResponse<bool>.Ok(result, "Rol Actualizado Correctamente "));
-
+           var command = new UpdateRolCommand { IdRol = idRol, IdTenant = idTenant, Nombre = request.Nombre, Descripcion = request.Descripcion }; 
+           var result = await _mediator.Send(command, ct); 
+            return Ok(ApiResponse<bool>.Ok(result, "Rol Actualizado Exitosamente")); 
         }
 
         [HttpPatch("ChangeStatus/{id}")]
@@ -57,5 +56,21 @@ namespace PymeTech.API.Controllers
             var data = await _mediator.Send(new ChangeStatusRolCommand { IdRol = id}, ct);
             return Ok(ApiResponse<bool>.Ok(data, "Estado Cambiado")); 
         }
+
+        [HttpPost("{idTenant}/roles/{idRol}/permisos/{idPermiso}")]
+        public async Task<IActionResult> AssignPermissionToRol(int idTenant , int idRol , int idPermiso ,[FromQuery] int? asignadoPor, CancellationToken ct)
+        {
+            var result = await _mediator.Send(new AssignPermissionCommand { IdTenant = idTenant , IdRol = idRol , IdPermisos = idPermiso,  AsignadoPor = asignadoPor }, ct);
+            return Ok(ApiResponse<bool>.Ok(result, "Permiso Asignado al Rol Correctamente"));
+
+        }
+
+        [HttpDelete("{idTenant}/roles/{idRol}/permisos/{idPermiso}")]
+        public async Task<IActionResult> RemovePermissionToRol(int idTenant, int idRol, int idPermiso, CancellationToken ct)
+        {
+            var result = await _mediator.Send(new RemovePermissionCommand { IdTenant = idTenant, IdRol = idRol, IdPermisos = idPermiso }, ct);
+            return Ok(ApiResponse<bool>.Ok(result, "Permiso Removido del Rol Correctamente"));
+        }
+
     }
 }

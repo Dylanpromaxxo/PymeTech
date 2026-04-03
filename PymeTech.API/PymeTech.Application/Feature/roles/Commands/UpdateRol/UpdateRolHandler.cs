@@ -23,7 +23,7 @@ namespace PymeTech.Application.Feature.roles.Commands.UpdateRol
 
         public async Task<bool> Handle(UpdateRolCommand request, CancellationToken cancellationToken)
         {
-            var rol = await _repositoy.GetByIdAsync(request.IdRol , cancellationToken );
+            var rol = await _repositoy.GetByIdAsync(request.IdRol  , request.IdTenant, cancellationToken );
             
             if (rol == null)
             {

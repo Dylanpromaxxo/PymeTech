@@ -13,6 +13,8 @@ namespace PymeTech.Application.Feature.roles.Commands.UpdateRol
         {
             RuleFor(x => x.IdRol)
                 .GreaterThan(0).WithMessage("El Id del rol debe ser mayor que cero."); 
+            RuleFor(x => x.IdTenant)
+                .GreaterThan(0).WithMessage("El Id del tenant debe ser mayor que cero.");
 
             RuleFor(x => x.Nombre)
                 .NotEmpty().WithMessage("El nombre del rol es requerido.")

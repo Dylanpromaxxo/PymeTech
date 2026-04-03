@@ -9,7 +9,8 @@ namespace PymeTech.Application.Feature.roles.Commands.UpdateRol
 {
     public  class UpdateRolCommand : IRequest<bool>
     {
-        public int IdRol { get; init; }      
+        public int IdRol { get; init; }    
+        public int IdTenant { get; init; } 
         public string Nombre { get; init; } = string.Empty;
         public string Descripcion { get; init; } = string.Empty;
     }
