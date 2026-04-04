@@ -8,9 +8,12 @@ using PymeTech.Application.Feature.roles.Commands.ChangeStatusRol;
 using PymeTech.Application.Feature.roles.Commands.CreateRol;
 using PymeTech.Application.Feature.roles.Commands.UpdateRol;
 using PymeTech.Application.Feature.roles.Queries.GetRolesbyIdTenant;
+using PymeTech.Application.Feature.roles.Queries.GetRolWithPermission;
 using PymeTech.Application.Feature.roles.rolesDTOs;
 using PymeTech.Application.Feature.roles.RolPermisoss.Command.AssignPermission;
 using PymeTech.Application.Feature.roles.RolPermisoss.Command.RemovePermission;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 
 namespace PymeTech.API.Controllers
@@ -49,11 +52,11 @@ namespace PymeTech.API.Controllers
             return Ok(ApiResponse<bool>.Ok(result, "Rol Actualizado Exitosamente")); 
         }
 
-        [HttpPatch("ChangeStatus/{id}")]
-        public async Task<IActionResult> ChangeStatus (int id , CancellationToken ct) 
+        [HttpPatch("ChangeStatus/{id}/{idTenant}")]
+        public async Task<IActionResult> ChangeStatus (int id , int idTenant , CancellationToken ct) 
         {
            
-            var data = await _mediator.Send(new ChangeStatusRolCommand { IdRol = id}, ct);
+            var data = await _mediator.Send(new ChangeStatusRolCommand { IdRol = id , IdTenant = idTenant}, ct);
             return Ok(ApiResponse<bool>.Ok(data, "Estado Cambiado")); 
         }
 
@@ -70,6 +73,15 @@ namespace PymeTech.API.Controllers
         {
             var result = await _mediator.Send(new RemovePermissionCommand { IdTenant = idTenant, IdRol = idRol, IdPermisos = idPermiso }, ct);
             return Ok(ApiResponse<bool>.Ok(result, "Permiso Removido del Rol Correctamente"));
+        }
+
+
+
+        [HttpGet("{idTenant}/{idRol}/Permission")]
+        public async Task<IActionResult> GetRolWithPermission(int idTenant, int idRol, CancellationToken ct) 
+        {
+            var rol = await _mediator.Send(new GetRolWithPermissionCommand { IdRol = idRol, IdTenant = idTenant }, ct);
+            return Ok(ApiResponse<RolesDetailsDTO>.Ok(rol)); 
         }
 
     }

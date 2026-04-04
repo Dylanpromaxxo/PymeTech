@@ -11,7 +11,8 @@ namespace PymeTech.Application.Feature.roles.Commands.ChangeStatusRol
     {
         public ChangeStatusRolValidator()
         {
-            RuleFor(r => r.IdRol).GreaterThan(0).WithMessage("El id no debe ser menor a 0 "); 
+            RuleFor(r => r.IdRol).GreaterThan(0).WithMessage("El id no debe ser menor a 0 ");
+            RuleFor(r => r.IdTenant).GreaterThan(0).WithMessage("El idTenant no debe ser menor a 0 "); 
         }
     }
 }

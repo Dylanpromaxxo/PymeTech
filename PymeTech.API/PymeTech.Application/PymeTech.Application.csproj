@@ -15,4 +15,10 @@
     <ProjectReference Include="..\PymeTech.Domain\PymeTech.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Feature\User\Command\" />
+    <Folder Include="Feature\User\UserDTOs\" />
+    <Folder Include="Feature\User\Queries\" />
+  </ItemGroup>
+
 </Project>

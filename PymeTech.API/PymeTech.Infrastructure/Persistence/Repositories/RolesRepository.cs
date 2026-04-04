@@ -49,6 +49,11 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
 
         }
 
+        public async Task<Rol?> GetRolesWithPermissionAsync(int idRol, int idTenant, CancellationToken ct)
+        {
+            return await _context.Roles.Include(r => r.RolPermisos).ThenInclude(p => p.Permiso).FirstOrDefaultAsync(r => r.IdTenant == idTenant && r.IdRol == idRol, ct);
+        }
+
         public async Task RemovePermissionToRolAsync(int idTenant, int idRol, int IdPermisos, CancellationToken ct)
         {
             var rolPermiso = await _context.RolPermisos.FirstOrDefaultAsync(c => c.IdTenant == idTenant && c.IdRol == idRol && c.IdPermiso == IdPermisos, ct);

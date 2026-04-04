@@ -22,7 +22,7 @@ namespace PymeTech.Application.Feature.roles.Commands.ChangeStatusRol
 
         public async Task<bool> Handle(ChangeStatusRolCommand request, CancellationToken cancellationToken)
         {
-            var rol = await _repository.GetByIdAsync(request.IdRol, cancellationToken);
+            var rol = await _repository.GetByIdAsync(request.IdTenant ,  request.IdRol, cancellationToken);
             if (rol == null) 
             {
                 throw new NotFoundException("rol", request.IdRol); 

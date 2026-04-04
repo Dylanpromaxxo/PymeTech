@@ -19,5 +19,9 @@ namespace PymeTech.Application.Common.Interfaces
         Task AssignPermissionToRolAsync(RolPermiso rolPermiso, CancellationToken ct);
         Task RemovePermissionToRolAsync(int idTenant , int idRol , int IdPermisos , CancellationToken ct);
 
+        //contrato para ver detalles de un rol con sus permisos asignados 
+
+        Task<Rol?> GetRolesWithPermissionAsync(int idRol, int idTenant, CancellationToken ct); 
+
     }
 }

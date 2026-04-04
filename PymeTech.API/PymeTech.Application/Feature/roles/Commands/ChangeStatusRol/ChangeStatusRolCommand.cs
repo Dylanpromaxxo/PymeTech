@@ -10,5 +10,6 @@ namespace PymeTech.Application.Feature.roles.Commands.ChangeStatusRol
     public  record  ChangeStatusRolCommand :IRequest<bool>
     {
         public int IdRol { get; init;  }
+        public int IdTenant { get; init; }
     }
 }
