@@ -17,8 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Feature\User\Command\" />
-    <Folder Include="Feature\User\UserDTOs\" />
-    <Folder Include="Feature\User\Queries\" />
+    <Folder Include="Feature\User\Queries\GetbyGmail\" />
   </ItemGroup>
 
 </Project>

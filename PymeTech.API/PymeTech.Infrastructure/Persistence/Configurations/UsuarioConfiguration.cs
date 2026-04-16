@@ -20,7 +20,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.Property(u => u.Activo).HasDefaultValue(true);
             builder.Property(u => u.FechaCreacion).IsRequired();
             builder.Property(u => u.FechaActualizacion).IsRequired();
-            builder.Property(u=> u.UltimoLogin).HasColumnType("datetime2").IsRequired(false);
+            builder.Property(u=> u.UltimoLogin).HasColumnType("DateTimeOffset").IsRequired(false);
 
             builder.HasIndex(u => new { u.IdTenant , u.Email  }).IsUnique();
 

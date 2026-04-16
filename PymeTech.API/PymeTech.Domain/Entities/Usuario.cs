@@ -20,7 +20,7 @@ namespace PymeTech.Domain.Entities
         public bool Activo { get; private set; }
         public DateTime FechaCreacion { get; private set; }
         public DateTime FechaActualizacion { get; private set; }
-        public DateTime? UltimoLogin { get; private set; }
+        public DateTimeOffset? UltimoLogin { get; private set; }
 
 
         // estas lineas hacen referencia a las tablas reales en la base de datos, es decir, a las entidades del dominio

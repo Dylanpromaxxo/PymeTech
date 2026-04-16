@@ -50,6 +50,12 @@ namespace PymeTech.API.Middleware
                     context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                     response = ApiResponse<object>.Fail(notFoundEx.Message);
                     break;
+
+                //exepcion de autorizacion — 401
+                case UnauthorizedException unauthorizedEx:
+                    context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    response = ApiResponse<object>.Fail(unauthorizedEx.Message);
+                    break;
                 // cualquier otro error — 500
                 default:
                     _logger.LogError(ex, "Error no controlado");

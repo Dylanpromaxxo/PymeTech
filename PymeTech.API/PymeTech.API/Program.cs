@@ -1,12 +1,16 @@
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using PymeTech.API.Middleware;
+using PymeTech.Application.Common.Behaviours;
 using PymeTech.Application.Common.Interfaces;
 using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
 using PymeTech.Infrastructure.Persistence;
 using PymeTech.Infrastructure.Persistence.Repositories;
-using PymeTech.Application.Common.Behaviours;
-using PymeTech.API.Middleware;
+using PymeTech.Infrastructure.Persistence.Services;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,10 +35,35 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBeh
 builder.Services.AddScoped<ITenantRepository, TenantRepository>();
 builder.Services.AddScoped<IPermisosRepository , PermisosRepository >();
 builder.Services.AddScoped<IRolesRepository, RolesRepository>();  
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<IJwtService, JwtService>();
 
 
 
 builder.Services.AddDbContext<AppDbContext>(opcion => opcion.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+            ValidAudience = builder.Configuration["JwtSettings:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"])
+            )
+        };
+    });
+
+
 
 
 builder.Services.AddMediatR(cfg =>
@@ -54,7 +83,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication(); // ← primero authentication
+app.UseAuthorization();  // ← después authorization
 
 //Aplicacion del Middleware 
 app.UseMiddleware<ExceptionMiddleware>();
