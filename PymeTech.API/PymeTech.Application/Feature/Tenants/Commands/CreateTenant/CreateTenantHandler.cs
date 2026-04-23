@@ -14,11 +14,11 @@ namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
     public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, int>
     {
         private readonly ITenantRepository _repositorio;
-
-        public CreateTenantHandler(ITenantRepository repository)
+        private readonly IUnitOfWork _unitOfWork; 
+        public CreateTenantHandler(ITenantRepository repository  , IUnitOfWork unitofWork)
         { 
-            _repositorio = repository; 
-        
+            _repositorio = repository;
+            _unitOfWork = unitofWork; 
         }
 
 
@@ -32,7 +32,9 @@ namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
 
 
            
-            return await _repositorio.AddAsync(tenant, cancellationToken); 
+            await _repositorio.AddAsync(tenant, cancellationToken);
+            await  _unitOfWork.SaveAsync(cancellationToken);
+            return tenant.IdTenant ; 
         }
     }
 }

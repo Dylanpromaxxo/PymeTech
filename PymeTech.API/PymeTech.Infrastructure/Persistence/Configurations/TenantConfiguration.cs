@@ -23,6 +23,9 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
              builder.Property(t => t.Activo).IsRequired();
 
             builder.HasIndex(t => t.Email).IsUnique();
+
+
+            
         }
     
     }

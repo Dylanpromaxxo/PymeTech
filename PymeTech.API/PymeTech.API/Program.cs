@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PymeTech.API.Middleware;
+using PymeTech.Application;
 using PymeTech.Application.Common.Behaviours;
 using PymeTech.Application.Common.Interfaces;
 using PymeTech.Application.Feature.Tenants.Queries.GetAllTenants;
+using PymeTech.Infrastructure;
 using PymeTech.Infrastructure.Persistence;
 using PymeTech.Infrastructure.Persistence.Repositories;
 using PymeTech.Infrastructure.Persistence.Services;
@@ -22,28 +24,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-//inyeccion de dependencias de MediaTr y Validetion IPipelineBehavior
-builder.Services.AddMediatR(cgf => cgf.RegisterServicesFromAssembly(typeof(GetAllTenantsHandler).Assembly));
-builder.Services.AddValidatorsFromAssembly(typeof(GetAllTenantsValidator).Assembly);
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-
-
-
-
-
-builder.Services.AddScoped<ITenantRepository, TenantRepository>();
-builder.Services.AddScoped<IPermisosRepository , PermisosRepository >();
-builder.Services.AddScoped<IRolesRepository, RolesRepository>();  
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-
-
-
-builder.Services.AddDbContext<AppDbContext>(opcion => opcion.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -62,12 +44,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             )
         };
     });
-
-
-
-
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 var app = builder.Build();
 

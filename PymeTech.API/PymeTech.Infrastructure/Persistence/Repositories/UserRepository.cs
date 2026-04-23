@@ -16,7 +16,19 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
         public UserRepository(AppDbContext context)
         {
             _context = context;
-        }   
+        }
+
+        public async Task<Usuario?> AddAsync(Usuario usuario, CancellationToken ct)
+        {
+            await _context.Usuarios.AddAsync(usuario, ct);    
+            await _context.SaveChangesAsync(ct);
+            return usuario;
+        }
+
+        public async Task<bool> EmailExistaAsync( string email, CancellationToken ct)
+        {
+             return await _context.Usuarios.AnyAsync(u =>  u.Email == email, ct);
+        }
 
         public async Task<Usuario> GetByEmailAsync(int idTenant, string email, CancellationToken ct)
         {

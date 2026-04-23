@@ -20,6 +20,8 @@ namespace PymeTech.Domain.Entities
         // estas lineas hacen referencia a que Tenant tiene muchos usuarios y muchos roles, es decir, a las entidades del dominio , 
         // NO A LAS DE ENTITY FRAMEWORK
         public ICollection<Usuario> Usuarios { get; private set; } = new List<Usuario>();
+        public ICollection<RolPermiso> RolesPermisos { get; private set; } = new List<RolPermiso>();
+
         public ICollection<Rol> Roles { get; private set; } = new List<Rol>();
 
         private Tenant() { }
@@ -51,6 +53,23 @@ namespace PymeTech.Domain.Entities
             Nombre = nombre; 
             Email = email; 
             Telefono = telefono; 
+        }
+
+        public void CreateAdminUser(string email, string nombre, string apellido, string passwordHash , List<Permisos> permisos)
+        {
+            var rolAdmin = new Rol(this, "Administrador", "Acceso total");
+
+            foreach (var permiso in permisos) 
+            {
+                rolAdmin.AssignPermission(permiso);
+            }
+
+            var user = new Usuario(this, rolAdmin, email, nombre, apellido, passwordHash);
+
+            Roles.Add(rolAdmin);
+            Usuarios.Add(user);
+
+
         }
 
 

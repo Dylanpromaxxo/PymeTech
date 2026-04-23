@@ -28,7 +28,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             // relaciones 
 
                 builder.HasOne(x => x.Tenant)
-                    .WithMany()
+                    .WithMany(x=> x.RolesPermisos)
                     .HasForeignKey(x => x.IdTenant)
                     .OnDelete(DeleteBehavior.Restrict);
 

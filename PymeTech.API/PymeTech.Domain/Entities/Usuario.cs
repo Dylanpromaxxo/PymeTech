@@ -12,7 +12,7 @@ namespace PymeTech.Domain.Entities
     {
         public int IdUsuario { get; private set; }
         public int IdTenant { get; private set; }
-        public int IdRol { get; private set; }
+        public int IdRol { get; private set; }  
         public string Email { get; private set; }
         public string Nombre { get; private set; }
         public string Apellido { get; private set; }
@@ -61,11 +61,11 @@ namespace PymeTech.Domain.Entities
 
         private Usuario() { }
 
-        public Usuario(int idTenat, int idRol, string email, string nombre, string apellido, string passwordhash)
+        public Usuario(Tenant tenant, Rol rol, string email, string nombre, string apellido, string passwordhash)
         {
 
-            IdTenant = idTenat;
-            IdRol = idRol;
+            Tenant = tenant;
+            Rol = rol;
             Email = email;
             Nombre = nombre;
             Apellido = apellido;
@@ -75,6 +75,16 @@ namespace PymeTech.Domain.Entities
             FechaActualizacion = DateTime.UtcNow;
 
 
+        }
+        public Usuario(string email, string nombre, string apellido, string passwordHash)
+        {
+            Email = email;
+            Nombre = nombre;
+            Apellido = apellido;
+            PasswordHash = passwordHash;
+            Activo = true;
+            FechaCreacion = DateTime.UtcNow;
+            FechaActualizacion = DateTime.UtcNow;
         }
 
         // Metodos para las entidades del dominio 

@@ -36,5 +36,21 @@ namespace PymeTech.Domain.Entities
             AsignadoPor = asignadoPor;
         }
 
+
+        public RolPermiso(Rol rol,Permisos permiso) 
+        {
+            Rol = rol;
+            Permiso = permiso;
+
+            IdRol = rol.IdRol;
+            IdTenant = rol.IdTenant;
+            IdPermiso = permiso.IdPermiso;
+            
+
+            FechaAsignado = DateTime.UtcNow; 
+
+        }
+        
+
     }
 }

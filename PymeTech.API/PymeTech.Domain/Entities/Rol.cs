@@ -38,6 +38,23 @@ namespace PymeTech.Domain.Entities
             FechaCreacion = DateTime.UtcNow;
 
         }
+
+        public Rol(Tenant tenant, string nombreRol, string descripcion)
+        {
+            if (string.IsNullOrWhiteSpace(nombreRol))
+                throw new ArgumentException("El nombre del rol no puede estar vacío");
+
+            Tenant = tenant;
+            IdTenant = tenant.IdTenant;
+            NombreRol = nombreRol;
+            Descripcion = descripcion;
+
+            Activo = true;
+            FechaCreacion = DateTime.UtcNow;
+        }
+
+
+
         public void Update(string nombreRol, string descripcion)
         {
             if (string.IsNullOrWhiteSpace(nombreRol))
@@ -49,6 +66,16 @@ namespace PymeTech.Domain.Entities
         public void ChangeStatus()
         {
             Activo = !Activo ;
+        }
+
+        public void AssignPermission(Permisos permiso) 
+        {
+
+            if (RolPermisos.Any(rp =>rp.IdPermiso == permiso.IdPermiso))
+                return;
+
+
+            RolPermisos.Add(new RolPermiso(this, permiso));
         }
     }
 }

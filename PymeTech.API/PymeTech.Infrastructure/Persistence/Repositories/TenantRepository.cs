@@ -14,11 +14,10 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<int> AddAsync(Tenant tenant, CancellationToken cn)
+        public async Task AddAsync(Tenant tenant, CancellationToken cn)
         {
            await _context.Tenants.AddAsync(tenant ,cn );
-            await _context.SaveChangesAsync(cn);
-            return tenant.IdTenant;
+         
 
         }
 

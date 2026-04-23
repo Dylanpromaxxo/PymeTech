@@ -21,7 +21,13 @@ namespace PymeTech.Application.Common.Interfaces
 
         //contrato para ver detalles de un rol con sus permisos asignados 
 
-        Task<Rol?> GetRolesWithPermissionAsync(int idRol, int idTenant, CancellationToken ct); 
+        Task<Rol?> GetRolesWithPermissionAsync(int idRol, int idTenant, CancellationToken ct);
+
+
+
+
+
+
 
     }
 }

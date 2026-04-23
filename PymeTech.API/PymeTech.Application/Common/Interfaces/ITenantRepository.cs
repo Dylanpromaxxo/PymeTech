@@ -12,7 +12,7 @@ namespace PymeTech.Application.Common.Interfaces
         public Task<IReadOnlyList<Tenant>> GetAllAsync(CancellationToken cn);
         public Task<IReadOnlyList<Tenant>> GetDisableAsync(CancellationToken cn);
         public Task<Tenant?> GetByIdAsync(int id ,  CancellationToken cn);
-        public Task<int> AddAsync(Tenant tenant, CancellationToken cn);
+        public Task AddAsync(Tenant tenant, CancellationToken cn);
         public Task UpdateAsync(Tenant tenant, CancellationToken cn); 
         public Task DeleteAsync(Tenant tenant , CancellationToken cn ); 
     }
