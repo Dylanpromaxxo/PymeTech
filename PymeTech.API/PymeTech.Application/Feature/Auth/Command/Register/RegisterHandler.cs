@@ -53,29 +53,31 @@ namespace PymeTech.Application.Feature.Auth.Command.Register
                 var permisos = await _permisosRepository.GetAllAsync(cancellationToken);
 
                 await _tenantRepository.AddAsync(tenant, cancellationToken);
-
-                // ✅ GUARDAR EL TENANT PRIMERO para que IdTenant se asigne
+                
+                //Se guarda en bd retorna la llave primaria
                 await _unitOfWork.SaveAsync(cancellationToken);
-                // Ahora tenant.IdTenant = 1, 2, 3, etc (ya no es 0)
 
-                // 1️⃣ Crear el Rol (ahora tenant.IdTenant tiene valor real)
+
+                // Ahora tenant.IdTenant es el siguiente ejemplo 8 ya no es 0 
+
+                // creo el rol con el id tenant correcto 
                 var rolAdmin = new Rol(tenant, "Administrador", "Acceso total");
 
-                // 2️⃣ Asignar permisos (RolPermiso.IdTenant tendrá valor)
+                // Se asigna ahora tiene valor 
                 foreach (var permiso in permisos)
                 {
                     rolAdmin.AssignPermission(permiso);
                 }
 
-                // 3️⃣ Agregar rol a tenant
+                // se agrega rol al tenant
                 tenant.Roles.Add(rolAdmin);
 
-                // 4️⃣ Crear usuario
+                // se craa usuario y se agrega al tenant  
                 var passwordHash = _passwordHasher.Hash(request.Password);
                 var user = new Usuario(tenant, rolAdmin, request.Email, request.Nombre, request.Apellido, passwordHash);
                 tenant.Usuarios.Add(user);
 
-                // 5️⃣ GUARDAR EL RESTO
+                // Se guanda y se commitea osea se va directo a la bd 
                 await _unitOfWork.SaveAsync(cancellationToken);
                 await _unitOfWork.CommitAsync(cancellationToken);
 

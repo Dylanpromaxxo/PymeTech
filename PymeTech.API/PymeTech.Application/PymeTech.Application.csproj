@@ -16,6 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Feature\suppliers\Commands\" />
+    <Folder Include="Feature\suppliers\SuppliersDTOs\" />
     <Folder Include="Feature\User\Command\" />
     <Folder Include="Feature\User\Queries\GetbyGmail\" />
   </ItemGroup>

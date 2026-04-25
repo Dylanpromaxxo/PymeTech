@@ -55,22 +55,7 @@ namespace PymeTech.Domain.Entities
             Telefono = telefono; 
         }
 
-        public void CreateAdminUser(string email, string nombre, string apellido, string passwordHash , List<Permisos> permisos)
-        {
-            var rolAdmin = new Rol(this, "Administrador", "Acceso total");
-
-            foreach (var permiso in permisos) 
-            {
-                rolAdmin.AssignPermission(permiso);
-            }
-
-            var user = new Usuario(this, rolAdmin, email, nombre, apellido, passwordHash);
-
-            Roles.Add(rolAdmin);
-            Usuarios.Add(user);
-
-
-        }
+      
 
 
 
