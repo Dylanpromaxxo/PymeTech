@@ -39,13 +39,23 @@ namespace PymeTech.Domain.Entities
         private Clientes() { }
 
 
-        public Clientes(int idTenant, string tipoDoc, string numeroDoc, string razonSocial, string nombreContacto, string email, string telefono, string direccion, string tipo, int? creadoPor, int? actualizadoPor)
+        public Clientes(int idTenant, string tipoDoc, string numeroDoc, string razonSocial, string nombreContacto, string email, string telefono, string direccion, string tipo, int? creadoPor)
         {
             if (string.IsNullOrWhiteSpace(numeroDoc))
                 throw new ArgumentException("El número de documento no puede estar vacío");
+
             if (string.IsNullOrWhiteSpace(razonSocial))
                 throw new ArgumentException("La razón social no puede estar vacía");
 
+
+            tipoDoc = tipoDoc.Trim().ToUpper();
+            tipo = tipo.Trim().ToUpper();
+
+            if (!TiposDocumento.Validos.Contains(tipoDoc))
+                throw new ArgumentException("Tipo de documento inválido");
+
+            if (!TiposCliente.Validos.Contains(tipo))
+                throw new ArgumentException("Tipo de cliente inválido");
 
 
 
@@ -54,7 +64,7 @@ namespace PymeTech.Domain.Entities
             NumeroDoc = numeroDoc;
             RazonSocial = razonSocial;
             NombreContacto = nombreContacto;
-            Email = email;
+            Email = email.Trim().ToLowerInvariant();
             Telefono = telefono;
             Direccion = direccion;
             Tipo = tipo;
@@ -62,13 +72,66 @@ namespace PymeTech.Domain.Entities
             FechaCreacion = DateTime.UtcNow;
             FechaActualizacion = DateTime.UtcNow;
             CreadoPor = creadoPor;
+            
+        }
+        public void Update(
+      string tipoDocumento,
+      string numeroDoc,
+      string razonSocial,
+      string? nombreContacto,
+      string? email,
+      string? telefono,
+      string? direccion,
+      string tipo,
+      int? actualizadoPor)
+        {
+            if (string.IsNullOrWhiteSpace(numeroDoc))
+                throw new ArgumentException("El número de documento no puede estar vacío");
+
+            if (string.IsNullOrWhiteSpace(razonSocial))
+                throw new ArgumentException("La razón social no puede estar vacía");
+
+            TipoDocumento = tipoDocumento;
+            NumeroDoc = numeroDoc;
+            RazonSocial = razonSocial;
+            NombreContacto = nombreContacto;
+            Email = email;
+            Telefono = telefono;
+            Direccion = direccion;
+            Tipo = tipo;
             ActualizadoPor = actualizadoPor;
+            FechaActualizacion = DateTime.UtcNow;
+        }
+
+        public void ChangeStatus(int? actualizadoPor)
+        {
+            Activo = !Activo;
+            ActualizadoPor = actualizadoPor;
+            FechaActualizacion = DateTime.UtcNow;
         }
 
 
+        public static class TiposDocumento
+        {
+            public const string NIT = "NIT";
+            public const string DPI = "DPI";
+            public const string DNI = "DNI";
+            public const string CE = "CE";
+            public const string PASAPORTE = "PASAPORTE";
+            public const string OTRO = "OTRO";
 
+            public static readonly string[] Validos =
+                { NIT, DPI, DNI, CE, PASAPORTE, OTRO };
+        }
 
+        public static class TiposCliente
+        {
+            public const string PERSONA_NATURAL = "PERSONA_NATURAL";
+            public const string EMPRESA = "EMPRESA";
 
+            public static readonly string[] Validos =
+                { PERSONA_NATURAL, EMPRESA };
+        }
 
     }
 }

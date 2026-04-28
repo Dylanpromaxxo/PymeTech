@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace PymeTech.Application.Feature.suppliers.SuppliersDTOs
 {
-    internal class SupplerDTO
+    public record SupplerDTO
     {
+        public int IdProveedor  { get; init; }
+        public int IdTenant { get; init; } 
+        public string Email { get; init; } 
+        public string Telefono { get; init; } 
+        public string Direccion { get; init; } 
+        public bool Activo { get; init; } 
+        public DateTime FechaCreacion { get; init; } 
+        public UserCreator CreadoPor { get; init; } 
+
     }
+
+
+    public record UserCreator 
+    {
+
+
+    }
+
 }

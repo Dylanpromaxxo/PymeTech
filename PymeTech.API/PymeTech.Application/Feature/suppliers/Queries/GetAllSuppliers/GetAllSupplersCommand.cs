@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PymeTech.Application.Feature.suppliers.Queries.GetAllSuppliers
 {
-    public record GetAllSupplersCommand : IRequest<List<>>
+    public record GetAllSupplersCommand
     {
     }
 }
