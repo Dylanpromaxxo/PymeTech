@@ -10,7 +10,8 @@ namespace PymeTech.Application.Feature.Auth.Command.Login
 {
     public class LoginCommand : IRequest<LoginResponseDto>
     {
-        public int idTenant { get; init; }  
+       
+        public string CodigoEmpresa { get; init; }
         public string Email { get; init; }
         public string Password { get; init; }
     }

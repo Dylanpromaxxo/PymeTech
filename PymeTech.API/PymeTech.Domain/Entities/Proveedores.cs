@@ -62,5 +62,44 @@ namespace PymeTech.Domain.Entities
 
 
 
+        public void Actualizar(string tipoDoc, string numeroDoc, string razonSocial, string nombreContacto, string email, string telefono, string direccion, int? actualizadoPor)
+        {
+            if (string.IsNullOrWhiteSpace(numeroDoc))
+                throw new ArgumentException("El número de documento no puede estar vacío");
+            if (string.IsNullOrWhiteSpace(razonSocial))
+                throw new ArgumentException("La razón social no puede estar vacía");
+            TipoDocumento = tipoDoc;
+            NumeroDoc = numeroDoc;
+            RazonSocial = razonSocial;
+            NombreContacto = nombreContacto;
+            Email = email;
+            Telefono = telefono;
+            Direccion = direccion;
+            FechaActualizacion = DateTime.UtcNow;
+            ActualizadoPor = actualizadoPor;
+        }
+
+        public void ChangeStatus( int? actualizadoPor) 
+        {
+            Activo = !Activo;
+            FechaActualizacion = DateTime.UtcNow;
+            ActualizadoPor = actualizadoPor;
+        }
+
+
+        public static class TiposDocumento
+        {
+            public const string NIT = "NIT";
+            public const string DPI = "DPI";
+            public const string DNI = "DNI";
+            public const string CE = "CE";
+            public const string PASAPORTE = "PASAPORTE";
+            public const string OTRO = "OTRO";
+
+            public static readonly string[] Validos =
+                { NIT, DPI, DNI, CE, PASAPORTE, OTRO };
+        }
+
+
     }
 }

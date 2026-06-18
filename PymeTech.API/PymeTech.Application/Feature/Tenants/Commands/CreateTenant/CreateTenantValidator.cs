@@ -15,6 +15,10 @@ namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
             .NotEmpty().WithMessage("El nombre es obligatorio")
             .MaximumLength(100).WithMessage("El nombre no puede tener más de 100 caracteres");
 
+            RuleFor(x => x.CodigoEmpresa)
+            .NotEmpty().WithMessage("El Codigo es obligatorio")
+            .MaximumLength(100).WithMessage("El Codigo no puede tener más de 100 caracteres");
+
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("El email es obligatorio")
                 .EmailAddress().WithMessage("El email no tiene un formato válido");

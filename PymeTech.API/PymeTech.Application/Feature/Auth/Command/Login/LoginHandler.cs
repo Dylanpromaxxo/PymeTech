@@ -2,12 +2,7 @@
 using PymeTech.Application.Common.Exceptions;
 using PymeTech.Application.Common.Interfaces;
 using PymeTech.Application.Feature.Auth.AuthDTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PymeTech.Application.Feature.Auth.Command.Login
 {
@@ -16,16 +11,17 @@ namespace PymeTech.Application.Feature.Auth.Command.Login
         private readonly IJwtService _jwtService;
         private readonly IPasswordHasher _passwordHasher;
         private readonly  IUserRepository _userRepository;
-
+        private readonly ITenantRepository _tenantRepository; 
 
         public LoginHandler(
        IUserRepository userRepository,
        IPasswordHasher passwordHasher,
-       IJwtService jwtService)
+       IJwtService jwtService , ITenantRepository tenantRepository)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
             _jwtService = jwtService;
+            _tenantRepository = tenantRepository; 
         }
 
             
@@ -33,8 +29,12 @@ namespace PymeTech.Application.Feature.Auth.Command.Login
 
         public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            // 1. busca el usuario por email
-            var usuario = await _userRepository.GetByEmailAsync(request.idTenant, request.Email , cancellationToken);
+            // 0 buscar por codigo empresa 
+            var tenantID = await _tenantRepository.GetByCodeTenantAsync(request.CodigoEmpresa, cancellationToken);
+           
+
+                // 1. busca el usuario por email
+                var usuario = await _userRepository.GetByEmailAsync(tenantID, request.Email , cancellationToken);
 
             // 2. si no existe — mismo mensaje que password incorrecto por seguridad
             if (usuario == null)
@@ -59,6 +59,7 @@ namespace PymeTech.Application.Feature.Auth.Command.Login
             return new LoginResponseDto
             {
                 Token = token,
+                IdUsuario = usuario.IdUsuario,
                 Nombre = usuario.Nombre,
                 Email = usuario.Email,
                 NombreRol = usuario.Rol.NombreRol,

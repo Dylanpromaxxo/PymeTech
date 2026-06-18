@@ -14,7 +14,7 @@ namespace PymeTech.Domain.Entities
         public string? Descripcion { get; private set; }
         public bool Activo { get; private set; }
         public DateTime FechaCreacion { get; private set; }
-        public DateTime FechaActualizacion { get; private set; }
+        public DateTime? FechaActualizacion { get; private set; }
         public int? CreadoPor { get; private set; }
 
         // referencias a otras entidades del dominio 
@@ -31,7 +31,7 @@ namespace PymeTech.Domain.Entities
         private Categoria() { }
 
 
-        public Categoria(int idTenant, string nombre, string descripcion, int? creadoPor)
+        public Categoria(int idTenant, string nombre, string? descripcion, int? creadoPor)
         {
             if (string.IsNullOrWhiteSpace(nombre))
                 throw new ArgumentException("El nombre de la categoría no puede estar vacío");
@@ -44,5 +44,20 @@ namespace PymeTech.Domain.Entities
             CreadoPor = creadoPor;
         }
 
+
+        public void Update(string nombre, string? descripcion)
+        {
+            if (string.IsNullOrWhiteSpace(nombre))
+                throw new ArgumentException("El nombre de la categoría no puede estar vacío");
+            Nombre = nombre;
+            Descripcion = descripcion;
+            FechaActualizacion = DateTime.UtcNow;
+        }
+
+        public void ChangeStatus()
+        {
+            Activo = !Activo;
+            FechaActualizacion = DateTime.UtcNow;
+        }
     }
 }

@@ -17,6 +17,9 @@ namespace PymeTech.Application.Feature.Auth.Command.Login
 
             RuleFor(x => x.Password)
                 .NotEmpty().WithMessage("El password es obligatorio");
+
+            RuleFor(x => x.CodigoEmpresa)
+                .NotEmpty().WithMessage("el codigo no puede venir vacio");
         }
     }
 }

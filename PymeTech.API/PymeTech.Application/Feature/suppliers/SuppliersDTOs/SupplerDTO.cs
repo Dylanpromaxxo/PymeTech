@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,20 +11,18 @@ namespace PymeTech.Application.Feature.suppliers.SuppliersDTOs
     {
         public int IdProveedor  { get; init; }
         public int IdTenant { get; init; } 
-        public string Email { get; init; } 
-        public string Telefono { get; init; } 
-        public string Direccion { get; init; } 
+        public string TipoDocumento { get; init; } = string.Empty;
+        public string NumeroDocumento { get; init; } = string.Empty;
+        public string RazonSocial { get; init; } = string.Empty;
+        public string NombreContacto { get; init; } = string.Empty;
+        public string Email { get; init; } = string.Empty;
+        public string Telefono { get; init; } = string.Empty;
+        public string Direccion { get; init; } = string.Empty;
         public bool Activo { get; init; } 
         public DateTime FechaCreacion { get; init; } 
-        public UserCreator CreadoPor { get; init; } 
 
     }
 
 
-    public record UserCreator 
-    {
-
-
-    }
 
 }

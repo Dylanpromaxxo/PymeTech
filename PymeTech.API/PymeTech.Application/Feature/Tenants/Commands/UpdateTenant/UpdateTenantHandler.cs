@@ -32,6 +32,7 @@ namespace PymeTech.Application.Feature.Tenants.Commands.UpdateTenant
 
             QueryTenant.ActualizarDatos(
                 nombre: request.Nombre,
+                codigoEmpresa: request.CodigoEmpresa,
                 email: request.Email,
                 telefono: request.Telefono
                 );

@@ -28,11 +28,18 @@ namespace PymeTech.Infrastructure
             services.AddScoped<IPermisosRepository, PermisosRepository>();
             services.AddScoped<IRolesRepository, RolesRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>(); 
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ISuppliersRepository, SuppliersRepository>();
+            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            services.AddScoped<IStroreRepository, StoreRepository>();
             // Servicios
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<ICurrentUserService , CurrentUserService>();
+
+
+
+
             //services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddHttpContextAccessor();
 

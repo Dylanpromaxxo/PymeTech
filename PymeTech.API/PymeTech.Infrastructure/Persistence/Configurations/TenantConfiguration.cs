@@ -16,6 +16,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
             builder.ToTable("Tenant");
              builder.HasKey(t => t.IdTenant);
              builder.Property(t => t.Nombre).IsRequired().HasMaxLength(100);
+            builder.Property(t => t.CodigoEmpresa).IsRequired();
              builder.Property(t => t.Email).IsRequired().HasMaxLength(150);
              builder.Property(t => t.Telefono).HasMaxLength(20);
              builder.Property(t => t.PlanSuscripcion).IsRequired().HasMaxLength(20);
@@ -23,6 +24,7 @@ namespace PymeTech.Infrastructure.Persistence.Configurations
              builder.Property(t => t.Activo).IsRequired();
 
             builder.HasIndex(t => t.Email).IsUnique();
+            builder.HasIndex(t => t.CodigoEmpresa).IsUnique();
 
 
             

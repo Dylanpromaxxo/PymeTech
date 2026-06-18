@@ -9,6 +9,7 @@ namespace PymeTech.Application.Feature.Auth.AuthDTO
     public class LoginResponseDto
     {
         public string Token { get; init; }
+        public int IdUsuario { get; init; }
         public string Nombre { get; init; }
         public string Email { get; init; }
         public string NombreRol { get; init; }

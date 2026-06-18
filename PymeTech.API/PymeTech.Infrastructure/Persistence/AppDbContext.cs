@@ -23,6 +23,7 @@ namespace PymeTech.Infrastructure.Persistence
         public DbSet<Permisos> Permisos { get; set; }   
         public DbSet<Clientes> Clientes { get; set; } 
         public DbSet<Proveedores> Proveedores { get; set; }
+        public DbSet<Categoria> Categoria { get; set;  }
         public DbSet<Almacenes> Almacenes { get; set; }
         public DbSet<Productos> Productos { get; set; } 
         public DbSet<Inventario> Inventarios { get; set; } 

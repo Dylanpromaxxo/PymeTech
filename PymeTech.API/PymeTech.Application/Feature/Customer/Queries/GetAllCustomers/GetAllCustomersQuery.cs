@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace PymeTech.Application.Feature.Customer.Queries.GetAllCustomers
 {
-    public class GetAllCustomersQuery : IRequest<List<CustomerDTO>>
+    public class GetAllCustomersQuery : IRequest<List<SummaryCustomerDTO>>
     {
+       public int IdCliente { get; init; } 
     }
 }

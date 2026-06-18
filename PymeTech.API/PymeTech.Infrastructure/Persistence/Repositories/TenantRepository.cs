@@ -32,6 +32,17 @@ namespace PymeTech.Infrastructure.Persistence.Repositories
             return await _context.Tenants.Where(ac => ac.Activo).OrderBy(n => n.Nombre).ToListAsync(cn); 
         }
 
+        public async Task<int> GetByCodeTenantAsync(string CodigoEmpresa, CancellationToken ct)
+        {
+            var tenant = await _context.Tenants.Where(t => t.CodigoEmpresa == CodigoEmpresa).FirstOrDefaultAsync(ct);
+            if (tenant == null) 
+            {
+                throw new Exception($"No se encontró un tenant con el código de empresa '{CodigoEmpresa}'.");
+            }
+
+            return tenant.IdTenant;
+        }
+
         public async Task<Tenant?> GetByIdAsync(int id, CancellationToken cn)
         {
             return await _context.Tenants.FirstOrDefaultAsync(c => c.IdTenant == id, cn);

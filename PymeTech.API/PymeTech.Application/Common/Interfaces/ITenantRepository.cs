@@ -10,6 +10,7 @@ namespace PymeTech.Application.Common.Interfaces
     public interface ITenantRepository
     {
         public Task<IReadOnlyList<Tenant>> GetAllAsync(CancellationToken cn);
+        public Task<int> GetByCodeTenantAsync(string CodigoEmpresa, CancellationToken ct); 
         public Task<IReadOnlyList<Tenant>> GetDisableAsync(CancellationToken cn);
         public Task<Tenant?> GetByIdAsync(int id ,  CancellationToken cn);
         public Task AddAsync(Tenant tenant, CancellationToken cn);

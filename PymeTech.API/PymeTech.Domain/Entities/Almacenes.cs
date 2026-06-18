@@ -44,6 +44,7 @@ namespace PymeTech.Domain.Entities
             FechaActualizacion = DateTime.UtcNow;
             CreadoPor = creadoPor;
         }   
+        
 
 
         public void ActualizarAlmacen(string nombre, string? descripcion, bool esPrincipal, int? actualizadoPor)

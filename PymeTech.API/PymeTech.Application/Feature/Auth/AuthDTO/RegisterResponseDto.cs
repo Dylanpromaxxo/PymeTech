@@ -10,6 +10,7 @@ namespace PymeTech.Application.Feature.Auth.AuthDTO
     {
         public int IdTenant { get; init; }
         public string NombreEmpresa { get; init; } = string.Empty;
+        public string CodigoEmpresa { get; init; } = string.Empty;
         public string Email { get; init; } = string.Empty;
         public string Mensaje { get; init; } = string.Empty;
     }

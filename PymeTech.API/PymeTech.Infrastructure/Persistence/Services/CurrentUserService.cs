@@ -21,7 +21,7 @@ namespace PymeTech.Infrastructure.Persistence.Services
 
 
 
-        public int IdUsuario 
+        public int IdUsuario
         {
             get 
             {

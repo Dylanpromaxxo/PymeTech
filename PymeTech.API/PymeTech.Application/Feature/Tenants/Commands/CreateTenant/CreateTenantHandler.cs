@@ -25,7 +25,9 @@ namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
         public async Task<int> Handle(CreateTenantCommand request, CancellationToken cancellationToken)
         {
             var tenant = new Tenant(
+               
                  nombre: request.Nombre,
+                 codigoEmpresa: request.CodigoEmpresa,
                  email: request.Email,
                  telefono: request.Telefono
                 );

@@ -9,7 +9,8 @@ namespace PymeTech.Application.Feature.Tenants.Commands.CreateTenant
 {
     public record CreateTenantCommand : IRequest<int>
     {
-        
+
+        public string CodigoEmpresa { get; init; }
         public string Nombre  { get; init; } 
         public string Email { get; init; } 
         public string Telefono { get; init; }    

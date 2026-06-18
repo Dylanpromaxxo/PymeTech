@@ -11,6 +11,7 @@ namespace PymeTech.Application.Feature.Auth.Command.Register
     public class RegisterCommand :IRequest<RegisterResponseDto>
     {
         // datos del tenant
+        public string CodigoEmpresa { get; init; } = string.Empty; 
         public string NombreEmpresa { get; init; } = string.Empty; 
         public string TelefonoEmpresa { get; init; } = string.Empty;
 

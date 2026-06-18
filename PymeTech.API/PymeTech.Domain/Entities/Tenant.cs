@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace PymeTech.Domain.Entities
 {
     public class Tenant
     {
         public int IdTenant { get; private set; }
         public string Nombre { get; private set; }
+        public string CodigoEmpresa { get; private set;  }
         public string Email { get; private set; }
         public string Telefono { get; private set; }
         public string PlanSuscripcion { get; private set; }
@@ -26,11 +22,12 @@ namespace PymeTech.Domain.Entities
 
         private Tenant() { }
 
-        public Tenant(string nombre, string email, string telefono)
+        public Tenant(string nombre, string codigoEmpresa ,  string email, string telefono)
         {
 
             Nombre = nombre;
             Email = email;
+            CodigoEmpresa = codigoEmpresa;
             Telefono = telefono;
             PlanSuscripcion = "BASICO";
             FechaCreacion = DateTime.UtcNow;
@@ -48,9 +45,10 @@ namespace PymeTech.Domain.Entities
             Activo = !Activo;
         }
 
-        public void ActualizarDatos(string nombre , string email , string telefono ) 
+        public void ActualizarDatos(string nombre , string codigoEmpresa ,  string email , string telefono ) 
         {
-            Nombre = nombre; 
+            Nombre = nombre;
+            CodigoEmpresa = codigoEmpresa; 
             Email = email; 
             Telefono = telefono; 
         }

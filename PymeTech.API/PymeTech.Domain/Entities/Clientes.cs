@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace PymeTech.Domain.Entities
 {
@@ -75,30 +76,53 @@ namespace PymeTech.Domain.Entities
             
         }
         public void Update(
-      string tipoDocumento,
-      string numeroDoc,
-      string razonSocial,
-      string? nombreContacto,
-      string? email,
-      string? telefono,
-      string? direccion,
-      string tipo,
-      int? actualizadoPor)
+     string tipoDocumento,
+     string numeroDoc,
+     string razonSocial,
+     string? nombreContacto,
+     string? email,
+     string? telefono,
+     string? direccion,
+     string tipo,
+     int? actualizadoPor)
         {
+            if (string.IsNullOrWhiteSpace(tipoDocumento))
+                throw new ArgumentException("El tipo de documento no puede estar vacio");
+
             if (string.IsNullOrWhiteSpace(numeroDoc))
-                throw new ArgumentException("El número de documento no puede estar vacío");
+                throw new ArgumentException("El numero de documento no puede estar vacio");
 
             if (string.IsNullOrWhiteSpace(razonSocial))
-                throw new ArgumentException("La razón social no puede estar vacía");
+                throw new ArgumentException("La razon social no puede estar vacia");
 
-            TipoDocumento = tipoDocumento;
-            NumeroDoc = numeroDoc;
-            RazonSocial = razonSocial;
-            NombreContacto = nombreContacto;
-            Email = email;
-            Telefono = telefono;
-            Direccion = direccion;
-            Tipo = tipo;
+            if (string.IsNullOrWhiteSpace(tipo))
+                throw new ArgumentException("El tipo de cliente no puede estar vacio");
+
+            TipoDocumento = tipoDocumento.Trim();
+            NumeroDoc = numeroDoc.Trim();
+            RazonSocial = razonSocial.Trim();
+            Tipo = tipo.Trim();
+
+            if (!string.IsNullOrWhiteSpace(nombreContacto))
+            {
+                NombreContacto = nombreContacto.Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                Email = email.Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(telefono))
+            {
+                Telefono = telefono.Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(direccion))
+            {
+                Direccion = direccion.Trim();
+            }
+
             ActualizadoPor = actualizadoPor;
             FechaActualizacion = DateTime.UtcNow;
         }
@@ -132,6 +156,12 @@ namespace PymeTech.Domain.Entities
             public static readonly string[] Validos =
                 { PERSONA_NATURAL, EMPRESA };
         }
+
+
+      
+
+
+
 
     }
 }

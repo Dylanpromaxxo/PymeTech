@@ -49,7 +49,7 @@ namespace PymeTech.Application.Feature.Auth.Command.Register
 
             try 
             {
-                var tenant = new Tenant(request.NombreEmpresa, request.Email, request.TelefonoEmpresa);
+                var tenant = new Tenant(request.Nombre , request.CodigoEmpresa , request.Email , request.TelefonoEmpresa );
                 var permisos = await _permisosRepository.GetAllAsync(cancellationToken);
 
                 await _tenantRepository.AddAsync(tenant, cancellationToken);
@@ -86,9 +86,10 @@ namespace PymeTech.Application.Feature.Auth.Command.Register
 
                 return new RegisterResponseDto
                 {
-                    IdTenant = tenant.IdTenant, 
-                    Email = request.Email, 
-                    NombreEmpresa = tenant.Nombre, 
+                    IdTenant = tenant.IdTenant,
+                    CodigoEmpresa = tenant.CodigoEmpresa,
+                    Email = request.Email,
+                    NombreEmpresa = tenant.Nombre,
                     Mensaje = "Registro exitoso"
 
                 }; 
